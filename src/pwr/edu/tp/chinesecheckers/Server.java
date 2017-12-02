@@ -22,7 +22,7 @@ public class Server {
 				Player player = new Player(listener.accept(), n);
 				System.out.println(n + " player connected");
 			}
-			//TODO: adding players to game and setting for each next player
+			//TODO: adding players to game and setting for each player their next player
 		}
 		} catch (IOException e) {
 			e.printStackTrace();

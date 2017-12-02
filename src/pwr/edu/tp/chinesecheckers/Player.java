@@ -26,4 +26,16 @@ public class Player extends Thread {
             System.out.println("Player died: " + e);
         }
     }
+    
+    public void setNextPlayer(Player player) {
+    	this.nextPlayer = player;
+    }
+    
+    public void otherPlayerMoved(int start, int stop, Player player) {
+    	//TODO
+    }
+    
+    public void run() {
+    	//TODO
+    }
 }

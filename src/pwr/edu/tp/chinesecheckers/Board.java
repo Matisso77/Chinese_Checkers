@@ -1,5 +1,5 @@
 package pwr.edu.tp.chinesecheckers;
 
-public class Peg {
+public class Board {
 	//TODO
 }
