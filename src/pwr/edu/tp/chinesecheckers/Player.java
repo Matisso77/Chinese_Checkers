@@ -7,7 +7,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class Player extends Thread {
-	private Colors color;
+	public Colors color;
 	private Socket socket;
 	private BufferedReader input;
     private PrintWriter output;
@@ -17,8 +17,7 @@ public class Player extends Thread {
         this.socket = socket;
         this.color = color;
         try {
-            input = new BufferedReader(
-                new InputStreamReader(socket.getInputStream()));
+            input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             output = new PrintWriter(socket.getOutputStream(), true);
             output.println("WELCOME " + color.ordinal());
             output.println("MESSAGE Waiting for opponents to connect");

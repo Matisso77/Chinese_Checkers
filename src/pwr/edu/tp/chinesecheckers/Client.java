@@ -9,6 +9,7 @@ import java.net.UnknownHostException;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class Client {
 	private static int port = 8901;
@@ -23,9 +24,11 @@ public class Client {
 		try {
 			socket = new Socket(serverAddress, port);
 		} catch (UnknownHostException e) {
+			JOptionPane.showMessageDialog(null, "Unknown host!", "ERROR", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 			System.exit(1);
 		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Could not establish connection with server!", "ERROR", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 			System.exit(1);
 		}

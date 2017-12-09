@@ -1,7 +1,7 @@
 package pwr.edu.tp.chinesecheckers;
 
 public class Game {
-	private Player currentPlayer;
+	public Player currentPlayer;
 	private Board board;
 	
 	public boolean hasWinner() {
