@@ -9,10 +9,12 @@ public class Server {
 	private static int port = 8901;
 	private static int playerNumber = 2;
 	ServerSocket listener;
+	ArrayList<Game> games;
 
 	public static void main(String[] args) {
 		Server server = new Server();
 		server.startListening();
+		server.games = new ArrayList<Game>();
 		server.startMatching();
 	}
 	
@@ -30,6 +32,7 @@ public class Server {
 		try {
 			while (true) {
 				Game game = new Game();
+				games.add(game);
 				ArrayList<Player> players = new ArrayList<Player>();
 				players.add(new Player(listener.accept(), Colors.BLUE));
 				System.out.println(players.get(players.size() - 1).color + " player connected");
@@ -37,9 +40,18 @@ public class Server {
 					players.add(new Player(listener.accept(), Colors.values()[i]));
 					System.out.println(players.get(players.size() - 1).color + " player connected");
 				}
+				
+				players.get(0).setNextPlayer(players.get(1));
+				for(int i = 0; i < players.size() - 1; i++)
+					players.get(i).setNextPlayer(players.get(i + 1));
+				players.get(players.size() - 1).setNextPlayer(players.get(0));
+				
 				Random generator = new Random();
 				int randomIndex = generator.nextInt(players.size());
 				game.currentPlayer = players.get(randomIndex);
+				for(Player p: players) {
+					p.start();
+				}
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
