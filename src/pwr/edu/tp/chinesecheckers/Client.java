@@ -104,6 +104,15 @@ public class Client {
 					break;
 				} else if (response.startsWith("MESSAGE")) {
 					messageLabel.setText(response.substring(8));
+                } else if (response.startsWith("OPPONENT_MOVED")) {
+                	drawingArea.repaint();
+                    messageLabel.setText("Opponent moved");
+                } else if (response.startsWith("YOUR_MOVE")) {
+                	drawingArea.repaint();
+                    messageLabel.setText("Your move");
+                } else if (response.startsWith("NEXT_PLAYER")) {
+                	Colors tempColor = Colors.values()[Character.getNumericValue(response.charAt(12))];
+                    messageLabel.setText(tempColor + "'s move");
                 } 
 			}
 		}

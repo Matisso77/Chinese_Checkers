@@ -33,10 +33,10 @@ public class Server {
 			while (true) {
 				Game game = new Game();
 				games.add(game);
-				game.players.add(new Player(listener.accept(), Colors.BLUE));
+				game.players.add(new Player(listener.accept(), Colors.BLUE, game));
 				System.out.println(game.players.get(game.players.size() - 1).color + " player connected");
 				for (int i = 1; i < playerNumber; i++) {
-					game.players.add(new Player(listener.accept(), Colors.values()[i]));
+					game.players.add(new Player(listener.accept(), Colors.values()[i], game));
 					System.out.println(game.players.get(game.players.size() - 1).color + " player connected");
 				}
 				

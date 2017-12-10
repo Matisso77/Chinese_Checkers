@@ -9,10 +9,12 @@ public class Player extends Thread {
 	public Colors color;
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
-	private Player nextPlayer;
+	Player nextPlayer;
+	Game game;
 
-	public Player(Socket socket, Colors color) throws Exception {
+	public Player(Socket socket, Colors color, Game game) throws Exception {
 		this.color = color;
+		this.game = game;
 		try {
 			out = new ObjectOutputStream(socket.getOutputStream());
 			in = new ObjectInputStream(socket.getInputStream());
@@ -29,7 +31,28 @@ public class Player extends Thread {
 	}
 
 	public void otherPlayerMoved(int start, int stop, Player player) {
-		// TODO
+		try {
+			out.writeObject("OPPONENT_MOVED");
+			out.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public void otherPlayerDone(int i) {
+		try {
+			out.writeObject("NEXT_PLAYER " + i);
+			out.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public void yourMove() {
+		try {
+			out.writeObject("YOUR_MOVE");
+			out.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void run() {
@@ -46,6 +69,9 @@ public class Player extends Thread {
 						//handle moving peg
 					} else if (command.startsWith("QUIT")) {
 						return;
+					}
+					else if (command.startsWith("DONE")) {
+						game.playerDone(this);
 					}
 				}
 			}
