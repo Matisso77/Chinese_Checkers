@@ -106,7 +106,6 @@ public class Client {
 					messageLabel.setText(response.substring(8));
                 } else if (response.startsWith("OPPONENT_MOVED")) {
                 	drawingArea.repaint();
-                    messageLabel.setText("Opponent moved");
                 } else if (response.startsWith("YOUR_MOVE")) {
                 	drawingArea.repaint();
                     messageLabel.setText("Your move");

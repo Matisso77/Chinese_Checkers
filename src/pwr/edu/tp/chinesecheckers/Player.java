@@ -48,7 +48,7 @@ public class Player extends Thread {
 	}
 	public void yourMove() {
 		try {
-			out.writeObject("YOUR_MOVE");
+			out.writeObject("MESSAGE Your move");
 			out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -59,7 +59,10 @@ public class Player extends Thread {
 		try {
 			out.writeObject("MESSAGE All players connected");
 			out.flush();
-			
+			if(this == game.currentPlayer) {
+				yourMove();
+			}
+				
 			while (true) {
 				String command;
 				Object obj = in.readObject();
