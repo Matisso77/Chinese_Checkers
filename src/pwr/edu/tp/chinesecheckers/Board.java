@@ -6,7 +6,7 @@ public class Board {
 		NOTUSED, EMPTY, FULL;
 	}
 	
-	static Fields board[][];
+	public static Fields board[][];
 	
 	public Board(int number_players) {
 		prepareBoard();
