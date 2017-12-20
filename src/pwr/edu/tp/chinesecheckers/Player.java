@@ -1,31 +1,51 @@
 package pwr.edu.tp.chinesecheckers;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class Player extends Thread {
-	public Colors color;
+	public Color color;
+	String colorS;
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
 	Player nextPlayer;
 	Game game;
+	int desiredNumber;
 
-	public Player(Socket socket, Colors color, Game game) throws Exception {
-		this.color = color;
-		this.game = game;
+	public Player(Socket socket) throws Exception {
 		try {
 			out = new ObjectOutputStream(socket.getOutputStream());
 			in = new ObjectInputStream(socket.getInputStream());
-			out.writeObject("WELCOME " + color.ordinal());
+		} catch (IOException e) {
+			System.out.println("Player died: " + e);
+		}
+		
+		Object object = in.readObject();
+		desiredNumber = 0;
+		if (object instanceof Integer) {
+			desiredNumber = (int) object;
+		}
+	}
+
+	public void setColor(Color color, String colorS) {
+		this.color = color;
+		this.colorS = colorS;
+		try {
+			out.writeObject("WELCOME " + colorS);
 			out.writeObject("MESSAGE Waiting for opponents to connect");
 			out.flush();
 		} catch (IOException e) {
 			System.out.println("Player died: " + e);
 		}
 	}
-
+	
+	public void setGame(Game game) {
+		this.game = game;
+	}
+	
 	public void setNextPlayer(Player player) {
 		this.nextPlayer = player;
 	}
@@ -38,9 +58,17 @@ public class Player extends Thread {
 			e.printStackTrace();
 		}
 	}
-	public void otherPlayerDone(int i) {
+	public void otherPlayerDone(String s) {
 		try {
-			out.writeObject("NEXT_PLAYER " + i);
+			out.writeObject("NEXT_PLAYER " + s);
+			out.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public void sendBoard(AltBoard board) {
+		try {
+			out.writeObject(board);
 			out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -58,6 +86,8 @@ public class Player extends Thread {
 	public void run() {
 		try {
 			out.writeObject("MESSAGE All players connected");
+			out.writeObject("ENABLE_BUTTON");
+			out.writeObject(game.alt);
 			out.flush();
 			if(this == game.currentPlayer) {
 				yourMove();

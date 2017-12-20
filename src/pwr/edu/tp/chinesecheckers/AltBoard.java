@@ -1,16 +1,11 @@
 package pwr.edu.tp.chinesecheckers;
 
 import java.awt.*;
-
-import javax.swing.BorderFactory;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-
-import com.sun.javafx.geom.Ellipse2D;
 
 public class AltBoard extends JPanel {
 	private static final long serialVersionUID = -8753997125722247972L;
-	public static Color board[][];
+	public Color board[][];
 
 	public AltBoard(int number_players) {
 		prepareBoard();
@@ -51,8 +46,6 @@ public class AltBoard extends JPanel {
 					} else
 						board[tempX2][y] = Color.BLACK;
 					tempX2 += 2;
-					// TODO: CHECK THAT IS REAL WORKS:
-					new Peg(Colors.BLUE, tempX2, y);
 				}
 			}
 			break;
@@ -261,7 +254,7 @@ public class AltBoard extends JPanel {
 		for (int y = 0; y < board[0].length; y++) {
 			for (int x = 0; x < board.length; x++) {
 				Color color = board[x][y];
-				if (color != Color.WHITE) {
+				if (color.getRGB() != Color.WHITE.getRGB()) {
 					g2d.setPaint(color);
 					int szer = 30;
 					g2d.fillOval((int) (10 + x * szer / 1.73), 10 + y * szer, szer, szer);

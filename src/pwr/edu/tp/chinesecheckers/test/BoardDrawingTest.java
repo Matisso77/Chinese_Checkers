@@ -3,8 +3,6 @@ package pwr.edu.tp.chinesecheckers.test;
 import java.awt.Color;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-
-import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 
 import pwr.edu.tp.chinesecheckers.AltBoard;
@@ -16,7 +14,6 @@ public class BoardDrawingTest {
 		frame.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		drawingArea.setBackground(Color.white);
-		drawingArea.setBorder(BorderFactory.createLineBorder(Color.black));
 		c.gridx = 0;
 		c.gridy = 0;
 		c.weightx = 1.0;
@@ -24,7 +21,7 @@ public class BoardDrawingTest {
 		c.fill = GridBagConstraints.BOTH;
 		frame.add(drawingArea, c);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(410, 240);
+		frame.setSize(500, 600);
 		frame.setVisible(true);
 		frame.setResizable(true);
 		drawingArea.repaint();

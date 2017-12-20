@@ -5,10 +5,16 @@ import java.util.ArrayList;
 public class Game {
 	public Player currentPlayer;
 	private Board board;
-	ArrayList<Player> players;
+	AltBoard alt;
+	ArrayList<Player> players = new ArrayList<>();
+	int playersCount;
+	boolean started = false;
 
-	public Game() {
+	public Game(int size) {
 		players = new ArrayList<Player>();
+		playersCount = size;
+		board = new Board(size);
+		alt = new AltBoard(size);
 	}
 
 	public boolean hasWinner() {
@@ -67,8 +73,9 @@ public class Game {
 			currentPlayer = currentPlayer.nextPlayer;
 			currentPlayer.yourMove();
 			for (Player p : players) {
+				p.sendBoard(alt);
 				if (p != currentPlayer)
-					p.otherPlayerDone(currentPlayer.color.ordinal());
+					p.otherPlayerDone(currentPlayer.colorS);
 			}
 		}
 	}
