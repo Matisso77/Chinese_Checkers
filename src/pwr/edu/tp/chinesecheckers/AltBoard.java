@@ -1,11 +1,16 @@
 package pwr.edu.tp.chinesecheckers;
 
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
+
 import javax.swing.JPanel;
 
 public class AltBoard extends JPanel {
 	private static final long serialVersionUID = -8753997125722247972L;
 	public Color board[][];
+	int fieldWidth = 30;
+	int activeX = -1;
+	int activeY = -1;
 
 	public AltBoard(int number_players) {
 		prepareBoard();
@@ -256,10 +261,20 @@ public class AltBoard extends JPanel {
 				Color color = board[x][y];
 				if (color.getRGB() != Color.WHITE.getRGB()) {
 					g2d.setPaint(color);
-					int szer = 30;
-					g2d.fillOval((int) (10 + x * szer / 1.73), 10 + y * szer, szer, szer);
+					g2d.fillOval((int) (10 + x * fieldWidth / 1.73), 10 + y * fieldWidth, fieldWidth, fieldWidth);
 				}
 			}
+		}
+		
+		if ((activeX != (-1)) && (activeY != (-1))) {
+			Stroke oldStroke = g2d.getStroke();
+            g2d.setStroke(new BasicStroke(2));
+            if (board[activeX][activeY].getRGB() == Color.BLACK.getRGB())
+                g2d.setPaint(Color.YELLOW);
+            else
+                g2d.setPaint(Color.BLACK);
+			g2d.draw(new Ellipse2D.Double((10 + activeX * fieldWidth / 1.73), 10 + activeY * fieldWidth, fieldWidth, fieldWidth));
+            g2d.setStroke(oldStroke);
 		}
 	}
 }

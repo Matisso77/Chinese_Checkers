@@ -22,7 +22,7 @@ public class Player extends Thread {
 		} catch (IOException e) {
 			System.out.println("Player died: " + e);
 		}
-		
+
 		Object object = in.readObject();
 		desiredNumber = 0;
 		if (object instanceof Integer) {
@@ -41,11 +41,11 @@ public class Player extends Thread {
 			System.out.println("Player died: " + e);
 		}
 	}
-	
+
 	public void setGame(Game game) {
 		this.game = game;
 	}
-	
+
 	public void setNextPlayer(Player player) {
 		this.nextPlayer = player;
 	}
@@ -58,6 +58,7 @@ public class Player extends Thread {
 			e.printStackTrace();
 		}
 	}
+
 	public void otherPlayerDone(String s) {
 		try {
 			out.writeObject("NEXT_PLAYER " + s);
@@ -66,6 +67,7 @@ public class Player extends Thread {
 			e.printStackTrace();
 		}
 	}
+
 	public void sendBoard(AltBoard board) {
 		try {
 			out.writeObject(board);
@@ -74,6 +76,7 @@ public class Player extends Thread {
 			e.printStackTrace();
 		}
 	}
+
 	public void yourMove() {
 		try {
 			out.writeObject("MESSAGE Your move");
@@ -89,28 +92,37 @@ public class Player extends Thread {
 			out.writeObject("ENABLE_BUTTON");
 			out.writeObject(game.alt);
 			out.flush();
-			if(this == game.currentPlayer) {
+			if (this == game.currentPlayer) {
 				yourMove();
 			}
-				
+
 			while (true) {
 				String command;
 				Object obj = in.readObject();
 				if (obj instanceof String) {
 					command = (String) obj;
 					if (command.startsWith("MOVE")) {
-						//handle moving peg
+						int sx = (int) in.readObject();
+						int sy = (int) in.readObject();
+						int gx = (int) in.readObject();
+						int gy = (int) in.readObject();
+						System.out.println("StartX: " + sx + " startY: " + sy + " goalX: " + gx + " goalY: " + gy);
+						if(game.legalMove(sx, sy, gx, gy)) {
+							System.out.println("legal move");
+						} else 
+							System.out.println("illegal move");
+						
+						
 					} else if (command.startsWith("QUIT")) {
 						return;
-					}
-					else if (command.startsWith("DONE")) {
+					} else if (command.startsWith("DONE")) {
 						game.playerDone(this);
 					}
 				}
 			}
 		} catch (IOException e) {
-            System.out.println("Player died: " + e);
-        } catch (ClassNotFoundException e) {
+			System.out.println("Player died: " + e);
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}

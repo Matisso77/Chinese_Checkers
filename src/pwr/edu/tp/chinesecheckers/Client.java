@@ -5,6 +5,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -80,6 +83,92 @@ public class Client {
 				}
 			}
 		});
+
+		drawingArea.addMouseListener(new MouseAdapter() {
+			int clickCounter = 0;
+			int startX, startY, goalX, goalY;
+			boolean missClick = true;
+
+			@Override
+			public void mousePressed(MouseEvent e) {
+				missClick = true;
+				clickCounter++;
+				int mX, mY;
+
+				if (clickCounter == 1) {
+					mX = e.getX();
+					mY = e.getY();
+
+					for (int y = 0; y < drawingArea.board[0].length; y++) {
+						for (int x = 0; x < drawingArea.board.length; x++) {
+							Color color = drawingArea.board[x][y];
+							if (color.getRGB() != Color.WHITE.getRGB()) {
+								if ((Math.hypot(
+										(int) (10 + drawingArea.fieldWidth / 2 + x * drawingArea.fieldWidth / 1.73
+												- mX),
+										10 + drawingArea.fieldWidth / 2 + y * drawingArea.fieldWidth
+												- mY) <= drawingArea.fieldWidth / 2)) {
+									drawingArea.activeX = x;
+									drawingArea.activeY = y;
+									startX = x;
+									startY = y;
+									drawingArea.repaint();
+									missClick = false;
+								}
+							}
+						}
+					}
+
+					if (missClick) {
+						drawingArea.activeX = -1;
+						drawingArea.activeY = -1;
+						clickCounter--;
+						drawingArea.repaint();
+					}
+
+				} else if (clickCounter == 2) {
+					mX = e.getX();
+					mY = e.getY();
+
+					for (int y = 0; y < drawingArea.board[0].length; y++) {
+						for (int x = 0; x < drawingArea.board.length; x++) {
+							Color color = drawingArea.board[x][y];
+							if (color.getRGB() != Color.WHITE.getRGB()) {
+								if ((Math.hypot(
+										(int) (10 + drawingArea.fieldWidth / 2 + x * drawingArea.fieldWidth / 1.73
+												- mX),
+										10 + drawingArea.fieldWidth / 2 + y * drawingArea.fieldWidth
+												- mY) <= drawingArea.fieldWidth / 2)) {
+									goalX = x;
+									goalY = y;
+									missClick = false;
+								}
+							}
+						}
+					}
+					
+					drawingArea.activeX = -1;
+					drawingArea.activeY = -1;
+					clickCounter = 0;
+					drawingArea.repaint();
+					
+					if (!missClick) {
+						try {
+							out.writeObject("MOVE");
+							out.writeObject(startX);
+							out.writeObject(startY);
+							out.writeObject(goalX);
+							out.writeObject(goalY);
+							out.flush();
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+					}
+
+				}
+			}
+		});
+
 		drawingArea.setBackground(Color.white);
 		c.gridx = 0;
 		c.gridy = 0;
