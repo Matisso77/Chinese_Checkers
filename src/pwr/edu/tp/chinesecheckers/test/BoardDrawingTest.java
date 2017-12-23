@@ -10,7 +10,7 @@ import pwr.edu.tp.chinesecheckers.AltBoard;
 public class BoardDrawingTest {
 	public static void main(String[] args) throws Exception {
 		JFrame frame = new JFrame("Board Drawing Test");
-		AltBoard drawingArea = new AltBoard(6);
+		AltBoard drawingArea = new AltBoard(3);
 		frame.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		drawingArea.setBackground(Color.white);
