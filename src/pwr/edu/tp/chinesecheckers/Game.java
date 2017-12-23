@@ -1,6 +1,7 @@
 package pwr.edu.tp.chinesecheckers;
 
 import java.util.ArrayList;
+import java.awt.Color;
 
 public class Game {
 	public Player currentPlayer;
@@ -82,6 +83,11 @@ public class Game {
 		return false;
 	}
 
+	public synchronized void move(int startX, int startY, int goalX, int goalY) {
+		alt.board[goalX][goalY] = alt.board[startX][startY];
+		alt.board[startX][startY] = Color.GRAY;		
+	}
+	
 	public synchronized void playerDone(Player player) {
 		if (player == currentPlayer) {
 			currentPlayer = currentPlayer.nextPlayer;
