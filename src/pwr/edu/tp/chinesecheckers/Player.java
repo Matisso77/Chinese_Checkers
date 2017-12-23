@@ -50,15 +50,6 @@ public class Player extends Thread {
 		this.nextPlayer = player;
 	}
 
-	public void otherPlayerMoved(int start, int stop, Player player) {
-		try {
-			out.writeObject("OPPONENT_MOVED");
-			out.flush();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
 	public void otherPlayerDone(String s) {
 		try {
 			out.writeObject("NEXT_PLAYER " + s);
@@ -68,9 +59,9 @@ public class Player extends Thread {
 		}
 	}
 
-	public void sendBoard(AltBoard board) {
+	public void sendBoard() {
 		try {
-			out.writeObject(board);
+			out.writeObject(game.board);
 			out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -88,9 +79,9 @@ public class Player extends Thread {
 
 	public void run() {
 		try {
+			sendBoard();
 			out.writeObject("MESSAGE All players connected");
 			out.writeObject("ENABLE_BUTTON");
-			out.writeObject(game.alt);
 			out.flush();
 			if (this == game.currentPlayer) {
 				yourMove();
@@ -106,11 +97,14 @@ public class Player extends Thread {
 						int sy = (int) in.readObject();
 						int gx = (int) in.readObject();
 						int gy = (int) in.readObject();
-						System.out.println("StartX: " + sx + " startY: " + sy + " goalX: " + gx + " goalY: " + gy);
-						if(game.legalMove(sx, sy, gx, gy)) {
-							System.out.println("legal move");
-						} else 
-							System.out.println("illegal move");
+						if(game.legalMove2(sx, sy, gx, gy)) {
+							game.move(sx, sy, gx, gy, this);
+							out.writeObject("MESSAGE You moved");
+							out.flush();
+						} else {
+							out.writeObject("MESSAGE You can't move there!");
+							out.flush();
+						}
 						
 						
 					} else if (command.startsWith("QUIT")) {

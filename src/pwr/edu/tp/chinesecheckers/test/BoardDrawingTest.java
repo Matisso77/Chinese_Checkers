@@ -5,12 +5,12 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import javax.swing.JFrame;
 
-import pwr.edu.tp.chinesecheckers.AltBoard;
+import pwr.edu.tp.chinesecheckers.Board;
 
 public class BoardDrawingTest {
 	public static void main(String[] args) throws Exception {
 		JFrame frame = new JFrame("Board Drawing Test");
-		AltBoard drawingArea = new AltBoard(3);
+		Board drawingArea = new Board(3);
 		frame.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		drawingArea.setBackground(Color.white);

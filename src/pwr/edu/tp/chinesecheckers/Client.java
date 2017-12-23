@@ -26,7 +26,7 @@ public class Client {
 	private ObjectOutputStream out;
 	private JFrame frame = new JFrame("Chinese Checkers");
 	private JLabel messageLabel = new JLabel("");
-	private AltBoard drawingArea = new AltBoard(0);
+	private Board drawingArea = new Board(0);
 	private JButton button = new JButton("Done");
 
 	public Client(String serverAddress) throws IOException {
@@ -150,7 +150,6 @@ public class Client {
 					drawingArea.activeX = -1;
 					drawingArea.activeY = -1;
 					clickCounter = 0;
-					drawingArea.repaint();
 					
 					if (!missClick) {
 						try {
@@ -164,7 +163,7 @@ public class Client {
 							e1.printStackTrace();
 						}
 					}
-
+					drawingArea.repaint();
 				}
 			}
 		});
@@ -195,8 +194,6 @@ public class Client {
 					break;
 				} else if (response.startsWith("MESSAGE")) {
 					messageLabel.setText(response.substring(8));
-				} else if (response.startsWith("OPPONENT_MOVED")) {
-					drawingArea.repaint();
 				} else if (response.startsWith("YOUR_MOVE")) {
 					drawingArea.repaint();
 					messageLabel.setText("Your move");
@@ -206,10 +203,17 @@ public class Client {
 				} else if (response.startsWith("ENABLE_BUTTON")) {
 					button.setEnabled(true);
 				}
-			} else if (obj instanceof AltBoard) {
-				drawingArea.board = ((AltBoard) obj).board;
+			} else if (obj instanceof Board) {
+				drawingArea.board = ((Board) obj).board;
+				/*Color[][] temp = new Color[25][17];
+				temp = ((Board) obj).board;
+				for (int y = 0; y < drawingArea.board[0].length; y++) {
+					for (int x = 0; x < drawingArea.board.length; x++) {
+						drawingArea.board[x][y] = temp[x][y];
+					}
+				}*/
+				drawingArea.repaint();
 			}
-			drawingArea.repaint();
 		}
 		out.writeObject("QUIT");
 		out.flush();
