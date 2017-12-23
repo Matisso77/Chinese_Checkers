@@ -59,9 +59,15 @@ public class Player extends Thread {
 		}
 	}
 
-	public void sendBoard() {
+	public void sendBoard(Color[][] board) {
+		int[][] rgb = new int[25][17];
 		try {
-			out.writeObject(game.board);
+			for (int y = 0; y < board[0].length; y++) {
+				for (int x = 0; x < board.length; x++) {
+					rgb[x][y] = board[x][y].getRGB();
+				}
+			}
+			out.writeObject(rgb);
 			out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -79,7 +85,7 @@ public class Player extends Thread {
 
 	public void run() {
 		try {
-			sendBoard();
+			sendBoard(game.board.board);
 			out.writeObject("MESSAGE All players connected");
 			out.writeObject("ENABLE_BUTTON");
 			out.flush();
@@ -98,7 +104,8 @@ public class Player extends Thread {
 						int gx = (int) in.readObject();
 						int gy = (int) in.readObject();
 						if(game.legalMove2(sx, sy, gx, gy)) {
-							game.move(sx, sy, gx, gy, this);
+							game.move(sx, sy, gx, gy);
+							sendBoard(game.board.board);
 							out.writeObject("MESSAGE You moved");
 							out.flush();
 						} else {

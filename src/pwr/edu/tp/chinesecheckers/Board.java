@@ -6,7 +6,6 @@ import java.awt.geom.Ellipse2D;
 import javax.swing.JPanel;
 
 public class Board extends JPanel {
-	private static final long serialVersionUID = -8753997125722247972L;
 	public Color board[][];
 	int fieldWidth = 30;
 	int activeX = -1;
@@ -276,10 +275,5 @@ public class Board extends JPanel {
 			g2d.draw(new Ellipse2D.Double((10 + activeX * fieldWidth / 1.73), 10 + activeY * fieldWidth, fieldWidth, fieldWidth));
             g2d.setStroke(oldStroke);
 		}
-	}
-	
-	public void move(int startX, int startY, int goalX, int goalY) {
-		board[goalX][goalY] = board[startX][startY];
-		board[startX][startY] = Color.GRAY;	
 	}
 }

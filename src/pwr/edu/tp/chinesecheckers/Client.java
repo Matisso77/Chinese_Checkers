@@ -203,15 +203,12 @@ public class Client {
 				} else if (response.startsWith("ENABLE_BUTTON")) {
 					button.setEnabled(true);
 				}
-			} else if (obj instanceof Board) {
-				drawingArea.board = ((Board) obj).board;
-				/*Color[][] temp = new Color[25][17];
-				temp = ((Board) obj).board;
+			} else if (obj instanceof int[][]) {
 				for (int y = 0; y < drawingArea.board[0].length; y++) {
 					for (int x = 0; x < drawingArea.board.length; x++) {
-						drawingArea.board[x][y] = temp[x][y];
+						drawingArea.board[x][y] = new Color(((int[][]) obj)[x][y]);
 					}
-				}*/
+				}
 				drawingArea.repaint();
 			}
 		}
