@@ -21,7 +21,17 @@ public class Game {
 		// TODO
 		return false;
 	}
-
+	public synchronized boolean legalMove2(int startX, int startY, int goalX, int goalY) {
+		
+		if(startX + 1 == goalX && startY + 1 == goalY || startX + 1 == goalX && startY - 1 == goalY || startX -1 == goalX && startY -1 == goalY ||startX -1 == goalX && startY + 1 == goalY || startX + 2 == goalX && startY  == goalY || startX -2 == goalX && startY == goalY)
+			if(Board.board[goalX][goalY].equals("EMPTY"))
+				return true;
+			else 
+				return false;
+		else	
+			return legalMove(startX, startY, goalX, goalY);
+	
+	}
 	public synchronized boolean legalMove(int startX, int startY, int goalX, int goalY) {
 		        if (!Board.board[startX + 1][startY + 1].equals("EMPTY") && !Board.board[startX + 1][startY + 1].equals("BLOCKED")) {
 		            if (startX + 2 == goalX && startY + 2 == goalY) {
