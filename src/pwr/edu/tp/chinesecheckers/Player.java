@@ -109,7 +109,9 @@ public class Player extends Thread {
 							out.writeObject("MESSAGE You moved");
 							out.flush();
 						} else {
+							
 							out.writeObject("MESSAGE You can't move there!");
+							//System.out.println(sx + sy + gx + gy);
 							out.flush();
 						}
 						
