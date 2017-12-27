@@ -173,7 +173,7 @@ public class Player extends Thread {
 							dead = true;
 							break;
 						}
-						if (game.legalMove2(sx, sy, gx, gy, this)) {
+						if (game.legalMove3(sx, sy, gx, gy, this, color)) {
 							game.move(sx, sy, gx, gy);
 							sendBoard(game.board.board);
 							try {
