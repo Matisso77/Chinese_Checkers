@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -102,7 +101,7 @@ public class Client {
 					for (int y = 0; y < drawingArea.board[0].length; y++) {
 						for (int x = 0; x < drawingArea.board.length; x++) {
 							Color color = drawingArea.board[x][y];
-							if (color.getRGB() != Color.WHITE.getRGB()) {
+							if ((color.getRGB() != Color.WHITE.getRGB()) && (color.getRGB() != Color.GRAY.getRGB())) {
 								if ((Math.hypot(
 										(int) (10 + drawingArea.fieldWidth / 2 + x * drawingArea.fieldWidth / 1.73
 												- mX),
@@ -220,9 +219,9 @@ public class Client {
 		String serverAddress = (args.length == 0) ? "localhost" : args[1];
 		Client client = new Client(serverAddress);
 		client.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		client.frame.setSize(480, 240);
 		client.frame.setVisible(true);
 		client.frame.setResizable(true);
+		client.frame.setSize(590, 628);
 		client.play();
 	}
 }

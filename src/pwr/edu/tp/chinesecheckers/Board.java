@@ -6,6 +6,7 @@ import java.awt.geom.Ellipse2D;
 import javax.swing.JPanel;
 
 public class Board extends JPanel {
+	private static final long serialVersionUID = -8753997125722247972L;
 	public Color board[][];
 	int fieldWidth = 30;
 	int activeX = -1;
@@ -253,6 +254,7 @@ public class Board extends JPanel {
 	}
 
 	public void doDrawing(Graphics g) {
+		fieldWidth = (int) Math.min((getWidth() - 20) / (13 + 12 * 0.156), (getHeight() - 20) / 17);
 		Graphics2D g2d = (Graphics2D) g;
 
 		for (int y = 0; y < board[0].length; y++) {
