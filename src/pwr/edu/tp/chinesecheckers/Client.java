@@ -192,6 +192,8 @@ public class Client {
 					color = new Color(Integer.parseInt(response.substring(10)));
 				} else if (response.startsWith("END")) {
 					messageLabel.setText("Game ended");
+					out.close();
+					in.close();
 					break;
 				} else if (response.startsWith("MESSAGE")) {
 					messageLabel.setText(response.substring(8));
@@ -205,7 +207,13 @@ public class Client {
 					messageLabel.setText(tempColor + "'s move");
 				} else if (response.startsWith("ENABLE_BUTTON")) {
 					button.setEnabled(true);
-				}
+				}else if (response.startsWith("YOU_FINISHED")) {
+					button.setEnabled(false);
+					messageLabel.setText("you finished");
+					out.close();
+					in.close();
+					break;
+				}				
 			} else if (obj instanceof int[][]) {
 				for (int y = 0; y < drawingArea.board[0].length; y++) {
 					for (int x = 0; x < drawingArea.board.length; x++) {
@@ -215,8 +223,6 @@ public class Client {
 				drawingArea.repaint();
 			}
 		}
-		out.writeObject("QUIT");
-		out.flush();
 	}
 
 	public static void main(String[] args) throws Exception {

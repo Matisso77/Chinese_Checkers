@@ -84,6 +84,17 @@ public class Player extends Thread {
 		}
 	}
 
+	public void youFinished() {
+		try {
+			out.writeObject("YOU_FINISHED");
+			out.flush();
+			out.close();
+			in.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void run() {
 		try {
 			sendBoard(game.board.board);
@@ -115,8 +126,6 @@ public class Player extends Thread {
 								out.flush();
 							}
 						}
-					} else if (command.startsWith("QUIT")) {
-						return;
 					} else if (command.startsWith("DONE")) {
 						game.playerDone(this);
 					}

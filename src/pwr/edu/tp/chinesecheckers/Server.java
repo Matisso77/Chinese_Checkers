@@ -38,6 +38,10 @@ public class Server {
 			int number = players.get(players.size()-1).desiredNumber;
 			
 			for(Game g: games) {
+				if (g.finished) {
+					games.remove(g);
+					continue;
+				}
 				if(g.playersCount == number) {
 					if (g.started == false) {
 						game = g;
@@ -50,7 +54,6 @@ public class Server {
 				game = new Game(number);
 				games.add(game);
 			}
-			System.out.println("Games on server: " + games.size() + " Players online: " + players.size());
 			
 			if(number == 2) {
 				if(game.players.size() == 0) 
