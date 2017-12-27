@@ -250,4 +250,14 @@ public class Game {
 			}
 		}
 	}
+	
+	public synchronized void endGame(Player player) {
+		for (Player p : players) {
+			if(p != player) {
+				p.end();
+			}
+		}
+		players.clear();
+		finished = true;
+	}
 }

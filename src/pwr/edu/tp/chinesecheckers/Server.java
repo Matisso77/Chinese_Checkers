@@ -16,7 +16,6 @@ public class Server {
 		Server server = new Server();
 		server.startListening();
 		server.games = new ArrayList<Game>();
-		// server.startMatching();
 		server.startAllocating();
 	}
 
@@ -30,20 +29,27 @@ public class Server {
 		System.out.println("Chinese checkers server is running");
 	}
 
-	public void startAllocating() throws Exception {
+	public void startAllocating() {
 		while (true) {
-			players.add(new Player(listener.accept()));
+			try {
+				players.add(new Player(listener.accept()));
+			} catch (Exception e) {
+				e.printStackTrace();
+				continue;
+			}
 			
 			Game game = null;
 			int number = players.get(players.size()-1).desiredNumber;
 			
 			for(Game g: games) {
-				if (g.finished) {
-					games.remove(g);
-					continue;
-				}
 				if(g.playersCount == number) {
 					if (g.started == false) {
+						for(Player p: g.players) {
+							if(p.dead) {
+								games.remove(g);
+								continue;
+							}
+						}	
 						game = g;
 						break;
 					}
@@ -111,36 +117,6 @@ public class Server {
 			}
 		}
 	}
-
-	/*public void startMatching() throws Exception {
-		try {
-			while (true) {
-				Game game = new Game(playerNumber);
-				games.add(game);
-				game.players.add(new Player(listener.accept(), Colors.BLUE, game));
-				System.out.println(game.players.get(game.players.size() - 1).color + " player connected");
-				for (int i = 1; i < playerNumber; i++) {
-					game.players.add(new Player(listener.accept(), Colors.values()[i], game));
-					System.out.println(game.players.get(game.players.size() - 1).color + " player connected");
-				}
-
-				game.players.get(0).setNextPlayer(game.players.get(1));
-				for (int i = 0; i < game.players.size() - 1; i++)
-					game.players.get(i).setNextPlayer(game.players.get(i + 1));
-				game.players.get(game.players.size() - 1).setNextPlayer(game.players.get(0));
-
-				Random generator = new Random();
-				int randomIndex = generator.nextInt(game.players.size());
-				game.currentPlayer = game.players.get(randomIndex);
-
-				for (Player p : game.players) {
-					p.start();
-				}
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}*/
 
 	public void finalize() {
 		try {

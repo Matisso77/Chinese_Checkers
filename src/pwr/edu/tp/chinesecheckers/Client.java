@@ -29,7 +29,7 @@ public class Client {
 	private Board drawingArea = new Board(0);
 	private JButton button = new JButton("Done");
 
-	public Client(String serverAddress) throws IOException {
+	public Client(String serverAddress) {
 		try {
 			socket = new Socket(serverAddress, port);
 		} catch (UnknownHostException e) {
@@ -45,6 +45,8 @@ public class Client {
 		try {
 			in = new ObjectInputStream(socket.getInputStream());
 		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Could not establish connection with server!", "ERROR",
+					JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 			System.exit(1);
 		}
@@ -57,10 +59,21 @@ public class Client {
 			System.exit(1);
 		}
 		Object[] possibilities = { 2, 3, 4, 6 };
-		int s = (int) JOptionPane.showInputDialog(frame, "How many players there should be in your game?",
-				"Choose number of players", JOptionPane.PLAIN_MESSAGE, null, possibilities, 2);
-		out.writeObject(s);
-		out.flush();
+		int s;
+		Object o = null;
+		do {
+			o = JOptionPane.showInputDialog(frame, "How many players there should be in your game?",
+					"Choose number of players", JOptionPane.PLAIN_MESSAGE, null, possibilities, 2);
+		} while (o == null);
+		s = (int) o;
+		try {
+			out.writeObject(s);
+			out.flush();
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Lost connection!", "ERROR", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			System.exit(1);
+		}
 
 		frame.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -80,6 +93,7 @@ public class Client {
 					out.flush();
 				} catch (IOException e) {
 					e.printStackTrace();
+					end();
 				}
 			}
 		});
@@ -161,6 +175,7 @@ public class Client {
 							out.flush();
 						} catch (IOException e1) {
 							e1.printStackTrace();
+							end();
 						}
 					}
 					drawingArea.repaint();
@@ -177,11 +192,17 @@ public class Client {
 		frame.add(drawingArea, c);
 	}
 
-	public void play() throws Exception {
+	public void play() {
 		String response;
-		Object obj;
+		Object obj = null;
 		while (true) {
-			obj = in.readObject();
+			try {
+				obj = in.readObject();
+			} catch (ClassNotFoundException | IOException e) {
+				e.printStackTrace();
+				end();
+				break;
+			}
 			if (obj instanceof String) {
 				response = (String) obj;
 				if (response.startsWith("WELCOME")) {
@@ -191,9 +212,7 @@ public class Client {
 				} else if (response.startsWith("SET_COLOR")) {
 					color = new Color(Integer.parseInt(response.substring(10)));
 				} else if (response.startsWith("END")) {
-					messageLabel.setText("Game ended");
-					out.close();
-					in.close();
+					end();
 					break;
 				} else if (response.startsWith("MESSAGE")) {
 					messageLabel.setText(response.substring(8));
@@ -210,8 +229,12 @@ public class Client {
 				}else if (response.startsWith("YOU_FINISHED")) {
 					button.setEnabled(false);
 					messageLabel.setText("you finished");
-					out.close();
-					in.close();
+					try {
+						out.close();
+						in.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 					break;
 				}				
 			} else if (obj instanceof int[][]) {
@@ -223,6 +246,16 @@ public class Client {
 				drawingArea.repaint();
 			}
 		}
+	}
+	
+	public void end() {
+		JOptionPane.showMessageDialog(null, "Game ended!", "ERROR", JOptionPane.ERROR_MESSAGE);
+		try {
+			out.close();
+			in.close();
+		} catch (IOException e) {
+		}
+		System.exit(1);
 	}
 
 	public static void main(String[] args) throws Exception {
