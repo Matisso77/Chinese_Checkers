@@ -116,7 +116,7 @@ public class Player extends Thread {
 							int sy = (int) in.readObject();
 							int gx = (int) in.readObject();
 							int gy = (int) in.readObject();
-							if (game.legalMove2(sx, sy, gx, gy, this)) {
+							if (game.legalMove3(sx, sy, gx, gy, this, color)) {
 								game.move(sx, sy, gx, gy);
 								sendBoard(game.board.board);
 								out.writeObject("MESSAGE You moved");
