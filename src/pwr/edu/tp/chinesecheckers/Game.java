@@ -136,7 +136,9 @@ public class Game {
 		return false;
 	}
 
-	public synchronized boolean legalMove2(int startX, int startY, int goalX, int goalY) {
+	public synchronized boolean legalMove2(int startX, int startY, int goalX, int goalY, Player player) {
+		if(player.color.getRGB() != board.board[startX][startY].getRGB())
+			return false;
 
 		if (startX + 1 == goalX && startY + 1 == goalY || startX + 1 == goalX && startY - 1 == goalY
 				|| startX - 1 == goalX && startY - 1 == goalY || startX - 1 == goalX && startY + 1 == goalY

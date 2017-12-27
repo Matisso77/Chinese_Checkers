@@ -35,6 +35,7 @@ public class Player extends Thread {
 		this.colorS = colorS;
 		try {
 			out.writeObject("WELCOME " + colorS);
+			out.writeObject("SET_COLOR " + color.getRGB());
 			out.writeObject("MESSAGE Waiting for opponents to connect");
 			out.flush();
 		} catch (IOException e) {
@@ -99,23 +100,21 @@ public class Player extends Thread {
 				if (obj instanceof String) {
 					command = (String) obj;
 					if (command.startsWith("MOVE")) {
-						int sx = (int) in.readObject();
-						int sy = (int) in.readObject();
-						int gx = (int) in.readObject();
-						int gy = (int) in.readObject();
-						if(game.legalMove2(sx, sy, gx, gy)) {
-							game.move(sx, sy, gx, gy);
-							sendBoard(game.board.board);
-							out.writeObject("MESSAGE You moved");
-							out.flush();
-						} else {
-							
-							out.writeObject("MESSAGE You can't move there!");
-							//System.out.println(sx + sy + gx + gy);
-							out.flush();
+						if (this == game.currentPlayer) {
+							int sx = (int) in.readObject();
+							int sy = (int) in.readObject();
+							int gx = (int) in.readObject();
+							int gy = (int) in.readObject();
+							if (game.legalMove2(sx, sy, gx, gy, this)) {
+								game.move(sx, sy, gx, gy);
+								sendBoard(game.board.board);
+								out.writeObject("MESSAGE You moved");
+								out.flush();
+							} else {
+								out.writeObject("MESSAGE Illegal move!");
+								out.flush();
+							}
 						}
-						
-						
 					} else if (command.startsWith("QUIT")) {
 						return;
 					} else if (command.startsWith("DONE")) {

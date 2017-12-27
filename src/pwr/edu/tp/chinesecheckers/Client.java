@@ -20,7 +20,8 @@ import javax.swing.JOptionPane;
 public class Client {
 	private static int port = 8901;
 	private Socket socket;
-	private String color;
+	private String colorS;
+	private Color color;
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
 	private JFrame frame = new JFrame("Chinese Checkers");
@@ -100,8 +101,8 @@ public class Client {
 
 					for (int y = 0; y < drawingArea.board[0].length; y++) {
 						for (int x = 0; x < drawingArea.board.length; x++) {
-							Color color = drawingArea.board[x][y];
-							if ((color.getRGB() != Color.WHITE.getRGB()) && (color.getRGB() != Color.GRAY.getRGB())) {
+							Color tmpcolor = drawingArea.board[x][y];
+							if (tmpcolor.getRGB() == color.getRGB()) {
 								if ((Math.hypot(
 										(int) (10 + drawingArea.fieldWidth / 2 + x * drawingArea.fieldWidth / 1.73
 												- mX),
@@ -132,7 +133,7 @@ public class Client {
 					for (int y = 0; y < drawingArea.board[0].length; y++) {
 						for (int x = 0; x < drawingArea.board.length; x++) {
 							Color color = drawingArea.board[x][y];
-							if (color.getRGB() != Color.WHITE.getRGB()) {
+							if (color.getRGB() == Color.GRAY.getRGB()) {
 								if ((Math.hypot(
 										(int) (10 + drawingArea.fieldWidth / 2 + x * drawingArea.fieldWidth / 1.73
 												- mX),
@@ -145,11 +146,11 @@ public class Client {
 							}
 						}
 					}
-					
+
 					drawingArea.activeX = -1;
 					drawingArea.activeY = -1;
 					clickCounter = 0;
-					
+
 					if (!missClick) {
 						try {
 							out.writeObject("MOVE");
@@ -185,14 +186,17 @@ public class Client {
 				response = (String) obj;
 				if (response.startsWith("WELCOME")) {
 					messageLabel.setText("Successfully connected to server");
-					color = response.substring(8);
-					frame.setTitle("Chinese Checkers - Player " + color);
-				}
-				if (response.startsWith("END")) {
+					colorS = response.substring(8);
+					frame.setTitle("Chinese Checkers - Player " + colorS);
+				} else if (response.startsWith("SET_COLOR")) {
+					color = new Color(Integer.parseInt(response.substring(10)));
+				} else if (response.startsWith("END")) {
 					messageLabel.setText("Game ended");
 					break;
 				} else if (response.startsWith("MESSAGE")) {
 					messageLabel.setText(response.substring(8));
+					if(messageLabel.getText().equals("You moved"))
+						button.doClick();
 				} else if (response.startsWith("YOUR_MOVE")) {
 					drawingArea.repaint();
 					messageLabel.setText("Your move");
