@@ -141,7 +141,7 @@ public class Game {
 		if (startX + 1 == goalX && startY + 1 == goalY || startX + 1 == goalX && startY - 1 == goalY
 				|| startX - 1 == goalX && startY - 1 == goalY || startX - 1 == goalX && startY + 1 == goalY
 				|| startX + 2 == goalX && startY == goalY || startX  - 2 == goalX && startY  == goalY) {
-			if (goalX >= 0 && goalX < 25 && goalY >= 0 && goalX < 17) {
+			if (goalX >= 0 && goalX < 25 && goalY >= 0 && goalY < 17) {
 				if (board.board[goalX][goalY].getRGB() == Color.GRAY.getRGB())
 					return true;
 				else
@@ -149,18 +149,18 @@ public class Game {
 			} else
 				return false;
 		} else
-			return legalMove(startX, startY, goalX, goalY);
+			return legalMove(0, 0, startX, startY, goalX, goalY);
 
 	}
 
-	public synchronized boolean legalMove(int startX, int startY, int goalX, int goalY) {
+	public synchronized boolean legalMove(int prevX, int prevY, int startX, int startY, int goalX, int goalY) {
 		if (startX + 1 < 25 && startY + 1 < 17 && !(board.board[startX + 1][startY + 1].getRGB() == Color.GRAY.getRGB())
 				&& !(board.board[startX + 1][startY + 1].getRGB() == Color.WHITE.getRGB())) {
 			if (startX + 2 < 25 && startY + 2 < 25 && startX + 2 == goalX && startY + 2 == goalY) {
 				return true;
-			} else if (startX + 2 < 25 && startY + 2 < 17
+			} else if (startX + 2 < 25 && startY + 2 < 17 && !(startX + 2 == prevX && startY + 2 == prevY)
 					&& board.board[startX + 2][startY + 2].getRGB() == Color.GRAY.getRGB()) {
-				if(legalMove(startX + 2, startY + 2, goalX, goalY))
+				if(legalMove(startX, startY, startX + 2, startY + 2, goalX, goalY))
 					return true;
 			}
 		}
@@ -168,27 +168,29 @@ public class Game {
 				&& !(board.board[startX + 1][startY - 1].getRGB() == Color.WHITE.getRGB())) {
 			if (startX + 2 == goalX && startY - 2 == goalY) {
 				return true;
-			} else if (startX + 2 < 25 && startY - 2 >= 0
+			} else if (startX + 2 < 25 && startY - 2 >= 0 && !(startX + 2 == prevX && startY - 2 == prevX)
 					&& board.board[startX + 2][startY - 2].getRGB() == Color.GRAY.getRGB()) {
-				if(legalMove(startX + 2, startY - 2, goalX, goalY));
+				if(legalMove(startX, startY, startX + 2, startY - 2, goalX, goalY))
 					return true;
 			}
 		}
-		if (startY + 2 < 17 && !(board.board[startX][startY + 2].getRGB() == Color.GRAY.getRGB())
-				&& !(board.board[startX][startY + 2].getRGB() == Color.WHITE.getRGB())) {
-			if (startX == goalX && startY + 4 == goalY) {
+		if (startX + 2 < 25 && !(board.board[startX + 2][startY].getRGB() == Color.GRAY.getRGB())
+				&& !(board.board[startX + 2][startY].getRGB() == Color.WHITE.getRGB())) {
+			if (startX + 4 == goalX && startY== goalY) {
 				return true;
-			} else if (startY + 4 < 17 && board.board[startX][startY + 4].getRGB() == Color.GRAY.getRGB()) {
-				if(legalMove(startX, startY + 4, goalX, goalY));
+			} else if (startX + 4 < 25 && !(startX + 4 == prevX && startY == prevY)
+					&& board.board[startX + 4][startY].getRGB() == Color.GRAY.getRGB()) {
+				if(legalMove(startX, startY, startX + 4, startY, goalX, goalY))
 					return true;
 			}
 		}
-		if (startY - 2 >= 0 && !(board.board[startX][startY - 2].getRGB() == Color.GRAY.getRGB())
-				&& !(board.board[startX][startY - 2].getRGB() == Color.WHITE.getRGB())) {
-			if (startX == goalX && startY - 4 == goalY) {
+		if (startX - 2 >= 0 && !(board.board[startX - 2][startY].getRGB() == Color.GRAY.getRGB())
+				&& !(board.board[startX - 2][startY].getRGB() == Color.WHITE.getRGB())) {
+			if (startX - 4 == goalX && startY == goalY) {
 				return true;
-			} else if (startY - 4 >= 0 && board.board[startX][startY - 4].getRGB() == Color.GRAY.getRGB()) {
-				if(legalMove(startX, startY - 4, goalX, goalY));
+			} else if (startX - 4 >= 0 && !(startX -4 == prevX && startY == prevY)
+					&& board.board[startX - 4][startY].getRGB() == Color.GRAY.getRGB()) {
+				if(legalMove(startX, startY, startX - 4, startY, goalX, goalY))
 					return true;
 			}
 		}
@@ -196,9 +198,9 @@ public class Game {
 				&& !(board.board[startX - 1][startY + 1].getRGB() == Color.WHITE.getRGB())) {
 			if (startX - 2 == goalX && startY + 2 == goalY) {
 				return true;
-			} else if (startY + 2 < 17 && startX - 2 >= 0
+			} else if (startY + 2 < 17 && startX - 2 >= 0 && !(startX - 2 == prevX && startY +2 == prevY)
 					&& board.board[startX - 2][startY + 2].getRGB() == Color.GRAY.getRGB()) {
-				if(legalMove(startX - 2, startY + 2, goalX, goalY));
+				if(legalMove(startX, startY, startX - 2, startY + 2, goalX, goalY))
 					return true;
 			}
 		}
@@ -206,12 +208,12 @@ public class Game {
 				&& !(board.board[startX - 1][startY - 1].getRGB() == Color.WHITE.getRGB())) {
 			if (startX - 2 == goalX && startY - 2 == goalY) {
 				return true;
-			} else if (startX - 2 >= 0 && startY - 2 >= 0
+			} else if (startX - 2 >= 0 && startY - 2 >= 0 && !(startX - 2 == prevX && startY - 2 == prevY)
 					&& board.board[startX - 2][startY - 2].getRGB() == Color.GRAY.getRGB()) {
-				if(legalMove(startX - 2, startY - 2, goalX, goalY));
+				if(legalMove(startX, startY, startX - 2, startY - 2, goalX, goalY))
 					return true;
 			}
-		}
+		}	
 		return false;
 	}
 
