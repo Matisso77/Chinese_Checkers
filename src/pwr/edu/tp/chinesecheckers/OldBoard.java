@@ -3,7 +3,7 @@ package pwr.edu.tp.chinesecheckers;
 
 public class OldBoard {
 	public enum Fields {
-		NOTUSED, EMPTY, FULL;
+		NOTUSED, EMPTY, FULL, BLUE, BLACK, RED, ORANGE, GREEN, PINK;
 	}
 	
 	public static Fields board[][];

@@ -26,10 +26,12 @@ public class Game {
 
 				int tempX = ((board.board.length - 1) / 2) - (fieldsNumberInRow61[y] / 2) * 2 + (y % 2);
 				for (int i = 0; i < fieldsNumberInRow61[y]; i++) {
-					if (board.board[tempX][y] == Color.BLACK)
+					if (board.board[tempX][y] == Color.BLACK){
 						winner++;
+					}
+					tempX += 2;
 				}
-				tempX += 2;
+				
 			}
 			if (winner == 10) {
 				System.out.println("Black ends");
@@ -43,8 +45,9 @@ public class Game {
 
 				int tempX = ((board.board.length - 1) / 2) - (fieldsNumberInRow61[y] / 2) * 2 + (y % 2);
 				for (int i = 0; i < fieldsNumberInRow61[y]; i++) {
-					if (board.board[tempX][y] == Color.BLUE)
+					if (board.board[tempX][y] == Color.BLUE){
 						winner++;
+					}
 					tempX += 2;
 				}
 				if (winner == 10) {
@@ -82,8 +85,9 @@ public class Game {
 				if (fieldsNumberInRow63[y] != 0)
 					temp_vector63++;
 				for (int i = 0; i < fieldsNumberInRow63[y]; i++) {
-					if (board.board[tempX63][y] == Color.GREEN)
+					if (board.board[tempX63][y] == Color.GREEN){
 						winner++;
+					}
 					tempX63 += 2;
 				}
 				tempX63 = 0;
@@ -102,8 +106,9 @@ public class Game {
 				if (fieldsNumberInRow64[y] != 0)
 					temp_vector64++;
 				for (int i = 0; i < fieldsNumberInRow64[y]; i++) {
-					if (board.board[tempX64][y] == Color.PINK)
+					if (board.board[tempX64][y] == Color.PINK){
 						winner++;
+					}
 					tempX64 += 2;
 				}
 				tempX64 = 21;
@@ -122,8 +127,9 @@ public class Game {
 				if (fieldsNumberInRow65[y] != 0)
 					temp_vector65++;
 				for (int i = 0; i < fieldsNumberInRow65[y]; i++) {
-					if (board.board[tempX65][y] == Color.RED)
+					if (board.board[tempX65][y] == Color.RED){
 						winner++;
+					}
 
 					tempX65 -= 2;
 				}
