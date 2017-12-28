@@ -17,7 +17,8 @@ public class Server {
 		server.startListening();
 		server.games = new ArrayList<Game>();
 		//server.startAllocating();
-		server.botTest();
+		//server.botBlackTest();
+		server.botBlueTest();
 	}
 
 	public void startListening() {
@@ -30,7 +31,44 @@ public class Server {
 		System.out.println("Chinese checkers server is running");
 	}
 
-	public void botTest() {
+	public void botBlueTest() {
+		while(true) {
+			Game game = null;
+			game = new Game(2);
+			games.add(game);
+			
+			players.add(new BotBlue());
+			players.get(players.size()-1).setColor(Color.BLUE, "BLUE");
+			players.get(players.size()-1).setGame(game);
+			game.players.add(players.get(players.size()-1));
+			
+			try {
+				players.add(new RealPlayer(listener.accept()));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			players.get(players.size()-1).setColor(Color.BLACK, "BLACK");
+			players.get(players.size()-1).setGame(game);
+			game.players.add(players.get(players.size()-1));
+			
+			for(int i = 0; i < game.players.size() - 1; i++)
+				game.players.get(i).setNextPlayer(game.players.get(i + 1));
+			game.players.get(game.players.size() - 1).setNextPlayer(game.players.get(0));
+			
+			Random generator = new Random();
+			int randomIndex = generator.nextInt(game.players.size());
+			game.currentPlayer = game.players.get(randomIndex);
+			
+			for(Player p: game.players) {
+				p.start();
+			}
+			game.started = true;
+			
+			}
+	}
+	
+	public void botBlackTest() {
 		while(true) {
 		try {
 			players.add(new RealPlayer(listener.accept()));

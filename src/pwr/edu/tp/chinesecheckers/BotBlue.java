@@ -3,21 +3,16 @@ package pwr.edu.tp.chinesecheckers;
 import java.awt.Color;
 import java.util.Random;
 
-public class BotBlue {
+public class BotBlue extends Player {
 	int tabPegs[][];
-	Board board;
-	Game game;
 	int goalMoves[];
-	Player player;
 	Random r = new Random(); 
 	int a;
 	
 	public BotBlue(){
-		
-		
-		
-		makeTabPegs(); //Do this only once
-		searchField();
+		tabPegs = new int[10][2];
+		goalMoves = new int[4];
+		makeTabPegs();
 	}
 	
 	private void searchField() {
@@ -30,7 +25,7 @@ public class BotBlue {
 		
 		for (int y = 17; y >= tabPegs[a][1]; y--) {
 			for (int x = 9; x <= 15; x++) {
-				if (game.legalMove3(tabPegs[a][0], tabPegs[a][1], x, y, player, Color.BLUE)){
+				if (game.legalMove3(tabPegs[a][0], tabPegs[a][1], x, y, this, Color.BLUE)){
 					goalMoves[0]=tabPegs[a][0];
 					goalMoves[1]=tabPegs[a][1];
 					goalMoves[2]=x;
@@ -46,22 +41,67 @@ public class BotBlue {
 		goalMoves[3]=tabPegs[a][1];
 		
 	}
-	
-	
-	
-	
+			
 	public void makeTabPegs(){	
 		int[] fieldsNumberInRow2 = { 1, 2, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 		int peg=0;
-		for (int y = 0; y < board.board[0].length; y++) {
+		for (int y = 0; y < 17; y++) {
 	
-			int tempX2 = ((board.board.length - 1) / 2) - (fieldsNumberInRow2[y] / 2) * 2 + (y % 2);
+			int tempX2 = ((25 - 1) / 2) - (fieldsNumberInRow2[y] / 2) * 2 + (y % 2);
 			for (int i = 0; i < fieldsNumberInRow2[y]; i++) {
 				tabPegs[peg][0]=tempX2;
 				tabPegs[peg][1]=y;
 				peg++;
 				tempX2 += 2;
 			}
+		}
+	}
+
+	@Override
+	public void setColor(Color color, String colorS) {
+		this.color = color;
+		this.colorS = colorS;
+	}
+
+	@Override
+	public void otherPlayerDone(String s) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Boolean sendBoard(Color[][] board) {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public void yourMove() {
+		searchField();
+		game.move(goalMoves[0], goalMoves[1], goalMoves[2], goalMoves[3]);
+		game.playerDone(this);
+	}
+
+	@Override
+	public void end() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void youFinished() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void run() {
+		if (this == game.currentPlayer) {
+			yourMove();
+		}
+		
+		while(true) {
+			
 		}
 	}
 }
