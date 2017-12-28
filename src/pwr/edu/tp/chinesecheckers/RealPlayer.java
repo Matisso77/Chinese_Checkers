@@ -137,7 +137,7 @@ public class RealPlayer extends Player {
 			yourMove();
 		}
 
-		while (true) {
+		while (!dead) {
 			String command;
 			Object obj = null;
 			try {
