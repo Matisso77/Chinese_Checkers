@@ -267,14 +267,12 @@ public class BotBlack extends Player {
 	@Override
 	public void yourMove() {
 		searchField();
-			/*
-			for(int i=0; i<10; i++){
-				System.out.println(tabPegs[i][0]+ " " + tabPegs[i][1]);
-			}
-				
-			
-			//game.move(12, 16, 10, 14);
-			*/
+		try {
+			sleep(10);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		game.move(goalMoves[0], goalMoves[1], goalMoves[2], goalMoves[3]);
 		game.playerDone(this);
 	}
