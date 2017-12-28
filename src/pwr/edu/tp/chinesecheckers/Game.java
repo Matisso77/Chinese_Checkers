@@ -352,28 +352,42 @@ public class Game {
 		if (startX + 1 == goalX && startY + 1 == goalY || startX + 1 == goalX && startY - 1 == goalY
 				|| startX - 1 == goalX && startY - 1 == goalY || startX - 1 == goalX && startY + 1 == goalY
 				|| startX + 2 == goalX && startY == goalY || startX - 2 == goalX && startY == goalY) {
-			if (goalX >= 0 && goalX < 25 && goalY >= 0 && goalY < 17) {
 				if (board.board[goalX][goalY].getRGB() == Color.GRAY.getRGB())
 					return true;
 				else
 					return false;
-			} else
-				return false;
+			
 		} else
-			return legalMove(startX, startY, startX, startY, goalX, goalY);
+			return legalMove(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+					startX, startY, startX, startY, goalX, goalY);
 
 	}
 
-	public boolean legalMove(int prevX, int prevY, int startX, int startY, int goalX, int goalY) {
+	public boolean legalMove(int prev13X, int prev13Y,int prev12X, int prev12Y,int prev11X, int prev11Y,int prev10X, int prev10Y, int prev9X, int prev9Y, int prev8X, int prev8Y,
+			int prev7X, int prev7Y,int prev6X, int prev6Y,int prev5X, int prev5Y,int prev4X, int prev4Y, int prev3X, int prev3Y, int prev2X, int prev2Y, int prevX, int prevY, int startX, int startY, int goalX, int goalY) {
+		System.out.println(startX+ " " + startY+ " " + goalX+ " " + goalY);
 		if (startX + 1 < 25 && startY + 1 < 17 && !(board.board[startX + 1][startY + 1].getRGB() == Color.GRAY.getRGB())
 				&& !(board.board[startX + 1][startY + 1].getRGB() == Color.WHITE.getRGB())) {
 			if (startX + 2 < 25 && startY + 2 < 25 && startX + 2 == goalX && startY + 2 == goalY
 					&& board.board[startX + 2][startY + 2].getRGB() == Color.GRAY.getRGB()) {
 				return true;
 			} else if (startX + 2 < 25 && startY + 2 < 17 && !(startX + 2 == prevX && startY + 2 == prevY)
-					&& board.board[startX + 2][startY + 2].getRGB() == Color.GRAY.getRGB()) {
+					&& board.board[startX + 2][startY + 2].getRGB() == Color.GRAY.getRGB()
+					&& !(startX + 2 == prev2X && startY + 2 == prev2Y)
+					&& !(startX + 2 == prev3X && startY + 2 == prev3Y)
+					&& !(startX + 2 == prev4X && startY + 2 == prev4Y)
+					&& !(startX + 2 == prev5X && startY + 2 == prev5Y)
+					&& !(startX + 2 == prev6X && startY + 2 == prev6Y)
+					&& !(startX + 2 == prev7X && startY + 2 == prev7Y)
+					&& !(startX + 2 == prev8X && startY + 2 == prev8Y)
+					&& !(startX + 2 == prev9X && startY + 2 == prev9Y)
+					&& !(startX + 2 == prev10X && startY + 2 == prev10Y)
+					&& !(startX + 2 == prev11X && startY + 2 == prev11Y)
+					&& !(startX + 2 == prev12X && startY + 2 == prev12Y)
+					&& !(startX + 2 == prev13X && startY + 2 == prev13Y)) {
 				
-				if (legalMove(startX, startY, startX + 2, startY + 2, goalX, goalY))
+				if (legalMove(prev12X, prev12Y,prev11X, prev11Y, prev10X,prev10Y,prev9X, prev9Y,prev8X, prev8Y, prev7X, prev7Y,
+						prev6X, prev6Y,prev5X, prev5Y, prev4X,prev4Y,prev3X, prev3Y,prev2X, prev2Y, prevX, prevY, startX, startY, startX + 2, startY + 2, goalX, goalY))
 					return true;
 			}
 		}
@@ -382,9 +396,24 @@ public class Game {
 			if (startX + 2 == goalX && startY - 2 == goalY 
 					&& board.board[startX + 2][startY - 2].getRGB() == Color.GRAY.getRGB()) {
 				return true;
-			} else if (startX + 2 < 25 && startY - 2 >= 0 && !(startX + 2 == prevX && startY - 2 == prevX)
-					&& board.board[startX + 2][startY - 2].getRGB() == Color.GRAY.getRGB()) {
-				if (legalMove(startX, startY, startX + 2, startY - 2, goalX, goalY))
+			} else if (startX + 2 < 25 && startY - 2 >= 0 && !(startX + 2 == prevX && startY - 2 == prevY)
+					&& board.board[startX + 2][startY - 2].getRGB() == Color.GRAY.getRGB()
+					&& !(startX + 2 == prev2X && startY - 2 == prev2Y)
+					&& !(startX + 2 == prev3X && startY - 2 == prev3Y)
+					&& !(startX + 2 == prev4X && startY - 2 == prev4Y)
+					&& !(startX + 2 == prev5X && startY - 2 == prev5Y)
+					&& !(startX + 2 == prev6X && startY - 2 == prev6Y)
+					&& !(startX + 2 == prev7X && startY - 2 == prev7Y)
+					&& !(startX + 2 == prev8X && startY - 2 == prev8Y)
+					&& !(startX + 2 == prev9X && startY - 2 == prev9Y)
+					&& !(startX + 2 == prev10X && startY - 2 == prev10Y)
+					&& !(startX + 2 == prev11X && startY - 2 == prev11Y)
+					&& !(startX + 2 == prev12X && startY - 2 == prev12Y)
+					&& !(startX + 2 == prev13X && startY - 2 == prev13Y)) 
+			{
+				
+				if (legalMove(prev12X, prev12Y,prev11X, prev11Y, prev10X,prev10Y,prev9X, prev9Y,prev8X, prev8Y, prev7X, prev7Y,
+						prev6X, prev6Y,prev5X, prev5Y, prev4X,prev4Y, prev3X, prev3Y,prev2X, prev2Y, prevX, prevY,startX, startY, startX + 2, startY - 2, goalX, goalY))
 					return true;
 			}
 		}
@@ -394,8 +423,21 @@ public class Game {
 					&& board.board[startX + 4][startY].getRGB() == Color.GRAY.getRGB()) {
 				return true;
 			} else if (startX + 4 < 25 && !(startX + 4 == prevX && startY == prevY)
-					&& board.board[startX + 4][startY].getRGB() == Color.GRAY.getRGB()) {
-				if (legalMove(startX, startY, startX + 4, startY, goalX, goalY))
+					&& board.board[startX + 4][startY].getRGB() == Color.GRAY.getRGB()
+					&& !(startX + 4 == prev2X && startY == prev2Y)
+					&& !(startX + 4 == prev3X && startY == prev3Y)
+					&& !(startX + 4 == prev4X && startY == prev4Y)
+					&& !(startX + 4 == prev5X && startY == prev5Y)
+					&& !(startX + 4 == prev6X && startY == prev6Y)
+					&& !(startX + 4 == prev7X && startY == prev7Y)
+					&& !(startX + 4 == prev8X && startY == prev8Y)
+					&& !(startX + 4 == prev9X && startY == prev9Y)
+					&& !(startX + 4 == prev10X && startY == prev10Y)
+					&& !(startX + 4 == prev11X && startY == prev11Y)
+					&& !(startX + 4 == prev12X && startY == prev12Y)
+					&& !(startX + 4 == prev13X && startY == prev13Y)) {
+				if (legalMove(prev12X, prev12Y,prev11X, prev11Y, prev10X,prev10Y,prev9X, prev9Y,prev8X, prev8Y, prev7X, prev7Y,
+						prev6X, prev6Y,prev5X, prev5Y, prev4X,prev4Y, prev3X, prev3Y,prev2X, prev2Y, prevX, prevY, startX, startY, startX + 4, startY, goalX, goalY))
 					return true;
 			}
 		}
@@ -405,8 +447,21 @@ public class Game {
 					&& board.board[startX - 4][startY].getRGB() == Color.GRAY.getRGB()) {
 				return true;
 			} else if (startX - 4 >= 0 && !(startX - 4 == prevX && startY == prevY)
-					&& board.board[startX - 4][startY].getRGB() == Color.GRAY.getRGB()) {
-				if (legalMove(startX, startY, startX - 4, startY, goalX, goalY))
+					&& board.board[startX - 4][startY].getRGB() == Color.GRAY.getRGB()
+					&& !(startX - 4 == prev2X && startY == prev2Y)
+					&& !(startX - 4 == prev3X && startY == prev3Y)
+					&& !(startX - 4 == prev4X && startY == prev4Y)
+					&& !(startX - 4 == prev5X && startY == prev5Y)
+					&& !(startX - 4 == prev6X && startY == prev6Y)
+					&& !(startX - 4 == prev7X && startY == prev7Y)
+					&& !(startX - 4 == prev8X && startY == prev8Y)
+					&& !(startX - 4 == prev9X && startY == prev9Y)
+					&& !(startX - 4 == prev10X && startY == prev10Y)
+					&& !(startX - 4 == prev11X && startY == prev11Y)
+					&& !(startX - 4 == prev12X && startY == prev12Y)
+					&& !(startX - 4 == prev13X && startY == prev13Y)) {
+				if (legalMove(prev12X, prev12Y,prev11X, prev11Y, prev10X,prev10Y,prev9X, prev9Y,prev8X, prev8Y, prev7X, prev7Y,
+						prev6X, prev6Y,prev5X, prev5Y, prev4X,prev4Y, prev3X, prev3Y,prev2X, prev2Y, prevX, prevY, startX, startY, startX - 4, startY, goalX, goalY))
 					return true;
 			}
 		}
@@ -416,8 +471,21 @@ public class Game {
 					&& board.board[startX - 2][startY + 2].getRGB() == Color.GRAY.getRGB()) {
 				return true;
 			} else if (startY + 2 < 17 && startX - 2 >= 0 && !(startX - 2 == prevX && startY + 2 == prevY)
-					&& board.board[startX - 2][startY + 2].getRGB() == Color.GRAY.getRGB()) {
-				if (legalMove(startX, startY, startX - 2, startY + 2, goalX, goalY))
+					&& board.board[startX - 2][startY + 2].getRGB() == Color.GRAY.getRGB()
+					&& !(startX - 2 == prev2X && startY + 2 == prev2Y)
+					&& !(startX - 2 == prev3X && startY + 2 == prev3Y)
+					&& !(startX - 2 == prev4X && startY + 2 == prev4Y)
+					&& !(startX - 2 == prev5X && startY + 2 == prev5Y)
+					&& !(startX - 2 == prev6X && startY + 2 == prev6Y)
+					&& !(startX - 2 == prev7X && startY + 2 == prev7Y)
+					&& !(startX - 2 == prev8X && startY + 2 == prev8Y)
+					&& !(startX - 2 == prev9X && startY + 2 == prev9Y)
+					&& !(startX - 2 == prev10X && startY + 2 == prev10Y)
+					&& !(startX - 2 == prev11X && startY + 2 == prev11Y)
+					&& !(startX - 2 == prev12X && startY + 2 == prev12Y)
+					&& !(startX - 2 == prev13X && startY + 2 == prev13Y)) {
+				if (legalMove(prev12X, prev12Y,prev11X, prev11Y, prev10X,prev10Y,prev9X, prev9Y,prev8X, prev8Y, prev7X, prev7Y,
+						prev6X, prev6Y,prev5X, prev5Y, prev4X,prev4Y, prev3X, prev3Y,prev2X, prev2Y, prevX, prevY,startX, startY, startX - 2, startY + 2, goalX, goalY))
 					return true;
 			}
 		}
@@ -427,8 +495,21 @@ public class Game {
 					&& board.board[startX - 2][startY - 2].getRGB() == Color.GRAY.getRGB()) {
 				return true;
 			} else if (startX - 2 >= 0 && startY - 2 >= 0 && !(startX - 2 == prevX && startY - 2 == prevY)
-					&& board.board[startX - 2][startY - 2].getRGB() == Color.GRAY.getRGB()) {
-				if (legalMove(startX, startY, startX - 2, startY - 2, goalX, goalY))
+					&& board.board[startX - 2][startY - 2].getRGB() == Color.GRAY.getRGB()
+					&& !(startX - 2 == prev2X && startY - 2 == prev2Y)
+					&& !(startX - 2 == prev3X && startY - 2 == prev3Y)
+					&& !(startX - 2 == prev4X && startY - 2 == prev4Y)
+					&& !(startX - 2 == prev5X && startY - 2 == prev5Y)
+					&& !(startX - 2 == prev6X && startY - 2 == prev6Y)
+					&& !(startX - 2 == prev7X && startY - 2 == prev7Y)
+					&& !(startX - 2 == prev8X && startY - 2 == prev8Y)
+					&& !(startX - 2 == prev9X && startY - 2 == prev9Y)
+					&& !(startX - 2 == prev10X && startY - 2 == prev10Y)
+					&& !(startX - 2 == prev11X && startY - 2 == prev11Y)
+					&& !(startX - 2 == prev12X && startY - 2 == prev12Y)
+					&& !(startX - 2 == prev13X && startY - 2 == prev13Y)) {
+				if (legalMove(prev12X, prev12Y,prev11X, prev11Y, prev10X,prev10Y,prev9X, prev9Y,prev8X, prev8Y, prev7X, prev7Y,
+						prev6X, prev6Y,prev5X, prev5Y, prev4X,prev4Y, prev3X, prev3Y,prev2X, prev2Y, prevX, prevY, startX, startY, startX - 2, startY - 2, goalX, goalY))
 					return true;
 			}
 		}
