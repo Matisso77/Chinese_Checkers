@@ -187,31 +187,42 @@ public class BotBlack extends Player {
 			}		
 		}
 		
-		a = r.nextInt(10);
-
-		while(tabPegs[a][1]<4){
+		while(true)
+		{
 			a = r.nextInt(10);
-		}
-		
-		for (int y = 4; y <= tabPegs[a][1]; y++) {
-			for (int x = 9; x <= 15; x++) {
-				if (game.legalMove3(tabPegs[a][0], tabPegs[a][1], x, y, this, Color.BLACK)){
-					goalMoves[0]=tabPegs[a][0];
-					goalMoves[1]=tabPegs[a][1];
-					goalMoves[2]=x;
-					goalMoves[3]=y;
-					tabPegs[a][0]=goalMoves[2];
-					tabPegs[a][1]=goalMoves[3];
-					return;
-				}
-				
+
+			while(tabPegs[a][1]<4){
+				a = r.nextInt(10);
 			}
+			
+			for (int y = 4; y <= tabPegs[a][1]; y++) {
+				for (int x = 9; x <= 15; x++) {
+					System.out.println(tabPegs[a][0]+ " " + tabPegs[a][1]);
+					if (game.legalMove3(tabPegs[a][0], tabPegs[a][1], x, y, this, Color.BLACK)){
+						goalMoves[0]=tabPegs[a][0];
+						goalMoves[1]=tabPegs[a][1];
+						goalMoves[2]=x;
+						goalMoves[3]=y;
+						
+						//System.out.println(tabPegs[a][0]+ " " + tabPegs[a][1]);
+						
+						tabPegs[a][0]=x;
+						tabPegs[a][1]=y;
+						
+						//System.out.println(tabPegs[a][0]+ " " + tabPegs[a][1]);
+						
+						//System.out.println(a + " " + goalMoves[0]+ " " + goalMoves[1]+ " " + goalMoves[2]+ " " + goalMoves[3]);
+						
+						return;
+					}
+					
+				}
+			}
+			
 		}
-		goalMoves[2]=tabPegs[a][0];
-		goalMoves[3]=tabPegs[a][1];
 		
 	}
-	
+		
 	
 	
 	
@@ -222,7 +233,6 @@ public class BotBlack extends Player {
 	
 			int tempX2 = ((25 - 1) / 2) - (fieldsNumberInRow2[y] / 2) * 2 + (y % 2);
 			for (int i = 0; i < fieldsNumberInRow2[y]; i++) {
-				System.out.println(y + " " + i);
 				tabPegs[peg][0]=tempX2;
 				tabPegs[peg][1]=y;
 				peg++;
@@ -252,7 +262,12 @@ public class BotBlack extends Player {
 	@Override
 	public void yourMove() {
 		searchField();
-		game.move(goalMoves[0], goalMoves[1], goalMoves[2], goalMoves[3]);
+		
+			//System.out.println(goalMoves[0]+ " " + goalMoves[1]+ " " + goalMoves[2]+ " " + goalMoves[3]);	
+			game.move(goalMoves[0], goalMoves[1], goalMoves[2], goalMoves[3]);
+			//game.move(12, 16, 10, 14);
+		
+			
 		game.playerDone(this);
 	}
 
