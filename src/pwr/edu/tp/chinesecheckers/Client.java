@@ -58,6 +58,7 @@ public class Client {
 			e.printStackTrace();
 			System.exit(1);
 		}
+		
 		Object[] possibilities = { 2, 3, 4, 6 };
 		int s;
 		Object o = null;
@@ -66,8 +67,16 @@ public class Client {
 					"Choose number of players", JOptionPane.PLAIN_MESSAGE, null, possibilities, 2);
 		} while (o == null);
 		s = (int) o;
+		
+		String bots = "NO";
+		if (JOptionPane.showConfirmDialog(frame, "Do you want to play with bots?", "How about bots?",
+		        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+		    bots = "YES";
+		} 
+		
 		try {
 			out.writeObject(s);
+			out.writeObject(bots);
 			out.flush();
 		} catch (IOException e) {
 			JOptionPane.showMessageDialog(null, "Lost connection!", "ERROR", JOptionPane.ERROR_MESSAGE);

@@ -9,6 +9,7 @@ public abstract class Player extends Thread {
 	Game game;
 	public boolean dead = false;
 	int desiredNumber;
+	boolean wantsBots = false;
 	
 	public abstract void setColor(Color color, String colorS);
 	

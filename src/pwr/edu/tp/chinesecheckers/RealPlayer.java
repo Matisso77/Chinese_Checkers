@@ -22,17 +22,24 @@ public class RealPlayer extends Player {
 			dead = true;
 		}
 
-		Object object = null;
+		Object object1 = null;
+		Object object2 = null;
 		try {
-			object = in.readObject();
+			object1 = in.readObject();
+			object2 = in.readObject();
 		} catch (ClassNotFoundException | IOException e) {
 			System.out.println("Player died: " + e);
 			game.endGame(this);
 			dead = true;
 		}
 		desiredNumber = 0;
-		if (object instanceof Integer) {
-			desiredNumber = (int) object;
+		if (object1 instanceof Integer) {
+			desiredNumber = (int) object1;
+		}
+		if (object2 instanceof String) {
+			String bots = (String) object2;
+			if(bots.equals("YES"))
+				wantsBots = true;
 		}
 	}
 
