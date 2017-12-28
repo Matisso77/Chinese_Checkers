@@ -353,22 +353,21 @@ public class Game {
 		if (startX + 1 == goalX && startY + 1 == goalY || startX + 1 == goalX && startY - 1 == goalY
 				|| startX - 1 == goalX && startY - 1 == goalY || startX - 1 == goalX && startY + 1 == goalY
 				|| startX + 2 == goalX && startY == goalY || startX - 2 == goalX && startY == goalY) {
-			if (board.board[goalX][goalY].getRGB() == Color.GRAY.getRGB())
-				return true;
-			else
-				return false;
-
+				if (board.board[goalX][goalY].getRGB() == Color.GRAY.getRGB())
+					return true;
+				else
+					return false;
+			
 		} else
-			return legalMove(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, startX, startY,
-					startX, startY, goalX, goalY);
+			return legalMove(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
+					startX, startY, startX, startY, goalX, goalY);
 
 	}
 
-	public boolean legalMove(int prev13X, int prev13Y, int prev12X, int prev12Y, int prev11X, int prev11Y, int prev10X,
-			int prev10Y, int prev9X, int prev9Y, int prev8X, int prev8Y, int prev7X, int prev7Y, int prev6X, int prev6Y,
-			int prev5X, int prev5Y, int prev4X, int prev4Y, int prev3X, int prev3Y, int prev2X, int prev2Y, int prevX,
-			int prevY, int startX, int startY, int goalX, int goalY) {
-		System.out.println(startX + " " + startY + " " + goalX + " " + goalY);
+	public boolean legalMove(int prev19X, int prev19Y,int prev18X, int prev18Y,int prev17X, int prev17Y,int prev16X, int prev16Y, int prev15X, int prev15Y, int prev14X, int prev14Y,
+			int prev13X, int prev13Y,int prev12X, int prev12Y,int prev11X, int prev11Y,int prev10X, int prev10Y, int prev9X, int prev9Y, int prev8X, int prev8Y,
+			int prev7X, int prev7Y,int prev6X, int prev6Y,int prev5X, int prev5Y,int prev4X, int prev4Y, int prev3X, int prev3Y, int prev2X, int prev2Y, int prevX, int prevY, int startX, int startY, int goalX, int goalY) {
+		System.out.println(startX+ " " + startY+ " " + goalX+ " " + goalY);
 		if (startX + 1 < 25 && startY + 1 < 17 && !(board.board[startX + 1][startY + 1].getRGB() == Color.GRAY.getRGB())
 				&& !(board.board[startX + 1][startY + 1].getRGB() == Color.WHITE.getRGB())) {
 			if (startX + 2 < 25 && startY + 2 < 25 && startX + 2 == goalX && startY + 2 == goalY
@@ -387,17 +386,23 @@ public class Game {
 					&& !(startX + 2 == prev10X && startY + 2 == prev10Y)
 					&& !(startX + 2 == prev11X && startY + 2 == prev11Y)
 					&& !(startX + 2 == prev12X && startY + 2 == prev12Y)
-					&& !(startX + 2 == prev13X && startY + 2 == prev13Y)) {
-
-				if (legalMove(prev12X, prev12Y, prev11X, prev11Y, prev10X, prev10Y, prev9X, prev9Y, prev8X, prev8Y,
-						prev7X, prev7Y, prev6X, prev6Y, prev5X, prev5Y, prev4X, prev4Y, prev3X, prev3Y, prev2X, prev2Y,
-						prevX, prevY, startX, startY, startX + 2, startY + 2, goalX, goalY))
+					&& !(startX + 2 == prev13X && startY + 2 == prev13Y)
+					&& !(startX + 2 == prev14X && startY + 2 == prev14Y)
+					&& !(startX + 2 == prev15X && startY + 2 == prev15Y)
+					&& !(startX + 2 == prev16X && startY + 2 == prev16Y)
+					&& !(startX + 2 == prev17X && startY + 2 == prev17Y)
+					&& !(startX + 2 == prev18X && startY + 2 == prev18Y)
+					&& !(startX + 2 == prev19X && startY + 2 == prev19Y)) {
+				
+				if (legalMove(prev18X, prev18Y,prev17X, prev17Y, prev16X,prev16Y,prev15X, prev15Y,prev14X, prev14Y, prev13X, prev13Y,
+						prev12X, prev12Y,prev11X, prev11Y, prev10X,prev10Y,prev9X, prev9Y,prev8X, prev8Y, prev7X, prev7Y,
+						prev6X, prev6Y,prev5X, prev5Y, prev4X,prev4Y,prev3X, prev3Y,prev2X, prev2Y, prevX, prevY, startX, startY, startX + 2, startY + 2, goalX, goalY))
 					return true;
 			}
 		}
 		if (startX + 1 < 25 && startY - 1 >= 0 && !(board.board[startX + 1][startY - 1].getRGB() == Color.GRAY.getRGB())
 				&& !(board.board[startX + 1][startY - 1].getRGB() == Color.WHITE.getRGB())) {
-			if (startX + 2 == goalX && startY - 2 == goalY
+			if (startX + 2 == goalX && startY - 2 == goalY 
 					&& board.board[startX + 2][startY - 2].getRGB() == Color.GRAY.getRGB()) {
 				return true;
 			} else if (startX + 2 < 25 && startY - 2 >= 0 && !(startX + 2 == prevX && startY - 2 == prevY)
@@ -413,11 +418,18 @@ public class Game {
 					&& !(startX + 2 == prev10X && startY - 2 == prev10Y)
 					&& !(startX + 2 == prev11X && startY - 2 == prev11Y)
 					&& !(startX + 2 == prev12X && startY - 2 == prev12Y)
-					&& !(startX + 2 == prev13X && startY - 2 == prev13Y)) {
-
-				if (legalMove(prev12X, prev12Y, prev11X, prev11Y, prev10X, prev10Y, prev9X, prev9Y, prev8X, prev8Y,
-						prev7X, prev7Y, prev6X, prev6Y, prev5X, prev5Y, prev4X, prev4Y, prev3X, prev3Y, prev2X, prev2Y,
-						prevX, prevY, startX, startY, startX + 2, startY - 2, goalX, goalY))
+					&& !(startX + 2 == prev13X && startY - 2 == prev13Y)
+					&& !(startX + 2 == prev14X && startY - 2 == prev14Y)
+					&& !(startX + 2 == prev15X && startY - 2 == prev15Y)
+					&& !(startX + 2 == prev16X && startY - 2 == prev16Y)
+					&& !(startX + 2 == prev17X && startY - 2 == prev17Y)
+					&& !(startX + 2 == prev18X && startY - 2 == prev18Y)
+					&& !(startX + 2 == prev19X && startY - 2 == prev19Y)) 
+			{
+				
+				if (legalMove(prev18X, prev18Y,prev17X, prev17Y, prev16X,prev16Y,prev15X, prev15Y,prev14X, prev14Y, prev13X, prev13Y,
+						prev12X, prev12Y,prev11X, prev11Y, prev10X,prev10Y,prev9X, prev9Y,prev8X, prev8Y, prev7X, prev7Y,
+						prev6X, prev6Y,prev5X, prev5Y, prev4X,prev4Y, prev3X, prev3Y,prev2X, prev2Y, prevX, prevY,startX, startY, startX + 2, startY - 2, goalX, goalY))
 					return true;
 			}
 		}
@@ -428,15 +440,27 @@ public class Game {
 				return true;
 			} else if (startX + 4 < 25 && !(startX + 4 == prevX && startY == prevY)
 					&& board.board[startX + 4][startY].getRGB() == Color.GRAY.getRGB()
-					&& !(startX + 4 == prev2X && startY == prev2Y) && !(startX + 4 == prev3X && startY == prev3Y)
-					&& !(startX + 4 == prev4X && startY == prev4Y) && !(startX + 4 == prev5X && startY == prev5Y)
-					&& !(startX + 4 == prev6X && startY == prev6Y) && !(startX + 4 == prev7X && startY == prev7Y)
-					&& !(startX + 4 == prev8X && startY == prev8Y) && !(startX + 4 == prev9X && startY == prev9Y)
-					&& !(startX + 4 == prev10X && startY == prev10Y) && !(startX + 4 == prev11X && startY == prev11Y)
-					&& !(startX + 4 == prev12X && startY == prev12Y) && !(startX + 4 == prev13X && startY == prev13Y)) {
-				if (legalMove(prev12X, prev12Y, prev11X, prev11Y, prev10X, prev10Y, prev9X, prev9Y, prev8X, prev8Y,
-						prev7X, prev7Y, prev6X, prev6Y, prev5X, prev5Y, prev4X, prev4Y, prev3X, prev3Y, prev2X, prev2Y,
-						prevX, prevY, startX, startY, startX + 4, startY, goalX, goalY))
+					&& !(startX + 4 == prev2X && startY == prev2Y)
+					&& !(startX + 4 == prev3X && startY == prev3Y)
+					&& !(startX + 4 == prev4X && startY == prev4Y)
+					&& !(startX + 4 == prev5X && startY == prev5Y)
+					&& !(startX + 4 == prev6X && startY == prev6Y)
+					&& !(startX + 4 == prev7X && startY == prev7Y)
+					&& !(startX + 4 == prev8X && startY == prev8Y)
+					&& !(startX + 4 == prev9X && startY == prev9Y)
+					&& !(startX + 4 == prev10X && startY == prev10Y)
+					&& !(startX + 4 == prev11X && startY == prev11Y)
+					&& !(startX + 4 == prev12X && startY == prev12Y)
+					&& !(startX + 4 == prev13X && startY == prev13Y)
+					&& !(startX + 4 == prev14X && startY == prev14Y)
+					&& !(startX + 4 == prev15X && startY == prev15Y)
+					&& !(startX + 4 == prev16X && startY == prev16Y)
+					&& !(startX + 4 == prev17X && startY == prev17Y)
+					&& !(startX + 4 == prev18X && startY == prev18Y)
+					&& !(startX + 4 == prev19X && startY == prev19Y)) {
+				if (legalMove(prev18X, prev18Y,prev17X, prev17Y, prev16X,prev16Y,prev15X, prev15Y,prev14X, prev14Y, prev13X, prev13Y,
+						prev12X, prev12Y,prev11X, prev11Y, prev10X,prev10Y,prev9X, prev9Y,prev8X, prev8Y, prev7X, prev7Y,
+						prev6X, prev6Y,prev5X, prev5Y, prev4X,prev4Y, prev3X, prev3Y,prev2X, prev2Y, prevX, prevY, startX, startY, startX + 4, startY, goalX, goalY))
 					return true;
 			}
 		}
@@ -447,15 +471,27 @@ public class Game {
 				return true;
 			} else if (startX - 4 >= 0 && !(startX - 4 == prevX && startY == prevY)
 					&& board.board[startX - 4][startY].getRGB() == Color.GRAY.getRGB()
-					&& !(startX - 4 == prev2X && startY == prev2Y) && !(startX - 4 == prev3X && startY == prev3Y)
-					&& !(startX - 4 == prev4X && startY == prev4Y) && !(startX - 4 == prev5X && startY == prev5Y)
-					&& !(startX - 4 == prev6X && startY == prev6Y) && !(startX - 4 == prev7X && startY == prev7Y)
-					&& !(startX - 4 == prev8X && startY == prev8Y) && !(startX - 4 == prev9X && startY == prev9Y)
-					&& !(startX - 4 == prev10X && startY == prev10Y) && !(startX - 4 == prev11X && startY == prev11Y)
-					&& !(startX - 4 == prev12X && startY == prev12Y) && !(startX - 4 == prev13X && startY == prev13Y)) {
-				if (legalMove(prev12X, prev12Y, prev11X, prev11Y, prev10X, prev10Y, prev9X, prev9Y, prev8X, prev8Y,
-						prev7X, prev7Y, prev6X, prev6Y, prev5X, prev5Y, prev4X, prev4Y, prev3X, prev3Y, prev2X, prev2Y,
-						prevX, prevY, startX, startY, startX - 4, startY, goalX, goalY))
+					&& !(startX - 4 == prev2X && startY == prev2Y)
+					&& !(startX - 4 == prev3X && startY == prev3Y)
+					&& !(startX - 4 == prev4X && startY == prev4Y)
+					&& !(startX - 4 == prev5X && startY == prev5Y)
+					&& !(startX - 4 == prev6X && startY == prev6Y)
+					&& !(startX - 4 == prev7X && startY == prev7Y)
+					&& !(startX - 4 == prev8X && startY == prev8Y)
+					&& !(startX - 4 == prev9X && startY == prev9Y)
+					&& !(startX - 4 == prev10X && startY == prev10Y)
+					&& !(startX - 4 == prev11X && startY == prev11Y)
+					&& !(startX - 4 == prev12X && startY == prev12Y)
+					&& !(startX - 4 == prev13X && startY == prev13Y)
+					&& !(startX - 4 == prev14X && startY == prev14Y)
+					&& !(startX - 4 == prev15X && startY == prev15Y)
+					&& !(startX - 4 == prev16X && startY == prev16Y)
+					&& !(startX - 4 == prev17X && startY == prev17Y)
+					&& !(startX - 4 == prev18X && startY == prev18Y)
+					&& !(startX - 4 == prev19X && startY == prev19Y)) {
+				if (legalMove(prev18X, prev18Y,prev17X, prev17Y, prev16X,prev16Y,prev15X, prev15Y,prev14X, prev14Y, prev13X, prev13Y,
+						prev12X, prev12Y,prev11X, prev11Y, prev10X,prev10Y,prev9X, prev9Y,prev8X, prev8Y, prev7X, prev7Y,
+						prev6X, prev6Y,prev5X, prev5Y, prev4X,prev4Y, prev3X, prev3Y,prev2X, prev2Y, prevX, prevY, startX, startY, startX - 4, startY, goalX, goalY))
 					return true;
 			}
 		}
@@ -477,10 +513,16 @@ public class Game {
 					&& !(startX - 2 == prev10X && startY + 2 == prev10Y)
 					&& !(startX - 2 == prev11X && startY + 2 == prev11Y)
 					&& !(startX - 2 == prev12X && startY + 2 == prev12Y)
-					&& !(startX - 2 == prev13X && startY + 2 == prev13Y)) {
-				if (legalMove(prev12X, prev12Y, prev11X, prev11Y, prev10X, prev10Y, prev9X, prev9Y, prev8X, prev8Y,
-						prev7X, prev7Y, prev6X, prev6Y, prev5X, prev5Y, prev4X, prev4Y, prev3X, prev3Y, prev2X, prev2Y,
-						prevX, prevY, startX, startY, startX - 2, startY + 2, goalX, goalY))
+					&& !(startX - 2 == prev13X && startY + 2 == prev13Y)
+					&& !(startX - 2 == prev14X && startY + 2 == prev14Y)
+					&& !(startX - 2 == prev15X && startY + 2 == prev15Y)
+					&& !(startX - 2 == prev16X && startY + 2 == prev16Y)
+					&& !(startX - 2 == prev17X && startY + 2 == prev17Y)
+					&& !(startX - 2 == prev18X && startY + 2 == prev18Y)
+					&& !(startX - 2 == prev19X && startY + 2 == prev19Y)) {
+				if (legalMove(prev18X, prev18Y,prev17X, prev17Y, prev16X,prev16Y,prev15X, prev15Y,prev14X, prev14Y, prev13X, prev13Y,
+						prev12X, prev12Y,prev11X, prev11Y, prev10X,prev10Y,prev9X, prev9Y,prev8X, prev8Y, prev7X, prev7Y,
+						prev6X, prev6Y,prev5X, prev5Y, prev4X,prev4Y, prev3X, prev3Y,prev2X, prev2Y, prevX, prevY,startX, startY, startX - 2, startY + 2, goalX, goalY))
 					return true;
 			}
 		}
@@ -502,10 +544,16 @@ public class Game {
 					&& !(startX - 2 == prev10X && startY - 2 == prev10Y)
 					&& !(startX - 2 == prev11X && startY - 2 == prev11Y)
 					&& !(startX - 2 == prev12X && startY - 2 == prev12Y)
-					&& !(startX - 2 == prev13X && startY - 2 == prev13Y)) {
-				if (legalMove(prev12X, prev12Y, prev11X, prev11Y, prev10X, prev10Y, prev9X, prev9Y, prev8X, prev8Y,
-						prev7X, prev7Y, prev6X, prev6Y, prev5X, prev5Y, prev4X, prev4Y, prev3X, prev3Y, prev2X, prev2Y,
-						prevX, prevY, startX, startY, startX - 2, startY - 2, goalX, goalY))
+					&& !(startX - 2 == prev13X && startY - 2 == prev13Y)
+					&& !(startX - 2 == prev14X && startY - 2 == prev14Y)
+					&& !(startX - 2 == prev15X && startY - 2 == prev15Y)
+					&& !(startX - 2 == prev16X && startY - 2 == prev16Y)
+					&& !(startX - 2 == prev17X && startY - 2 == prev17Y)
+					&& !(startX - 2 == prev18X && startY - 2 == prev18Y)
+					&& !(startX - 2 == prev19X && startY - 2 == prev19Y)) {
+				if (legalMove(prev18X, prev18Y,prev17X, prev17Y, prev16X,prev16Y,prev15X, prev15Y,prev14X, prev14Y, prev13X, prev13Y,
+						prev12X, prev12Y,prev11X, prev11Y, prev10X,prev10Y,prev9X, prev9Y,prev8X, prev8Y, prev7X, prev7Y,
+						prev6X, prev6Y,prev5X, prev5Y, prev4X,prev4Y, prev3X, prev3Y,prev2X, prev2Y, prevX, prevY, startX, startY, startX - 2, startY - 2, goalX, goalY))
 					return true;
 			}
 		}
