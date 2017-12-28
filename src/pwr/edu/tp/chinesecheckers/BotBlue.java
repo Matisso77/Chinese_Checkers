@@ -33,8 +33,8 @@ public class BotBlue {
 				if (game.legalMove3(tabPegs[a][0], tabPegs[a][1], x, y, player, Color.BLUE)){
 					goalMoves[0]=tabPegs[a][0];
 					goalMoves[1]=tabPegs[a][1];
-					goalMoves[2]=13;
-					goalMoves[3]=3;
+					goalMoves[2]=x;
+					goalMoves[3]=y;
 					tabPegs[a][0]=goalMoves[2];
 					tabPegs[a][1]=goalMoves[3];
 					return;

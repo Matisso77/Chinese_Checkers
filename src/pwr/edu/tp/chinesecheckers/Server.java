@@ -16,7 +16,8 @@ public class Server {
 		Server server = new Server();
 		server.startListening();
 		server.games = new ArrayList<Game>();
-		server.startAllocating();
+		//server.startAllocating();
+		server.botTest();
 	}
 
 	public void startListening() {
@@ -29,10 +30,47 @@ public class Server {
 		System.out.println("Chinese checkers server is running");
 	}
 
+	public void botTest() {
+		while(true) {
+		try {
+			players.add(new RealPlayer(listener.accept()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Game game = null;
+		int number = players.get(players.size()-1).desiredNumber;
+		game = new Game(number);
+		games.add(game);
+		
+		players.get(players.size()-1).setColor(Color.BLUE, "BLUE");
+		players.get(players.size()-1).setGame(game);
+		game.players.add(players.get(players.size()-1));
+		
+		players.add(new BotBlack());
+		players.get(players.size()-1).setColor(Color.BLACK, "BLACK");
+		players.get(players.size()-1).setGame(game);
+		game.players.add(players.get(players.size()-1));
+		
+		for(int i = 0; i < game.players.size() - 1; i++)
+			game.players.get(i).setNextPlayer(game.players.get(i + 1));
+		game.players.get(game.players.size() - 1).setNextPlayer(game.players.get(0));
+		
+		Random generator = new Random();
+		int randomIndex = generator.nextInt(game.players.size());
+		game.currentPlayer = game.players.get(randomIndex);
+		
+		for(Player p: game.players) {
+			p.start();
+		}
+		game.started = true;
+		
+		}
+	}
+	
 	public void startAllocating() {
 		while (true) {
 			try {
-				players.add(new Player(listener.accept()));
+				players.add(new RealPlayer(listener.accept()));
 			} catch (Exception e) {
 				e.printStackTrace();
 				continue;

@@ -3,28 +3,24 @@ package pwr.edu.tp.chinesecheckers;
 import java.awt.Color;
 import java.util.Random;
 
-public class BotBlack {
+public class BotBlack extends Player {
 	int tabPegs[][];
-	Board board;
-	Game game;
 	int goalMoves[];
-	Player player;
 	Random r = new Random(); 
 	int a;
 	
 	public BotBlack(){
-		
-		
-		
+		tabPegs = new int[10][2];
+		goalMoves = new int[4];
 		makeTabPegs(); //Do this only once
-		searchField();
+		//searchField();
 	}
 	
 	private void searchField() {
-		if(board.board[12][0] != Color.BLACK){
+		if(game.board.board[12][0] != Color.BLACK){
 			for(int i=0; i<10; i++){
 				
-				if (game.legalMove3(tabPegs[i][0], tabPegs[i][1], 12, 0, player, Color.BLACK)){
+				if (game.legalMove3(tabPegs[i][0], tabPegs[i][1], 12, 0, this, Color.BLACK)){
 					goalMoves[0]=tabPegs[i][0];
 					goalMoves[1]=tabPegs[i][1];
 					goalMoves[2]=12;
@@ -36,10 +32,10 @@ public class BotBlack {
 				}
 			}
 		}
-		if(board.board[11][1] != Color.BLACK){
+		if(game.board.board[11][1] != Color.BLACK){
 			for(int i=0; i<10; i++){
 				
-				if (game.legalMove3(tabPegs[i][0], tabPegs[i][1], 11, 1, player, Color.BLACK)){
+				if (game.legalMove3(tabPegs[i][0], tabPegs[i][1], 11, 1, this, Color.BLACK)){
 					if(tabPegs[i][1]>1){
 						goalMoves[0]=tabPegs[i][0];
 						goalMoves[1]=tabPegs[i][1];
@@ -54,10 +50,10 @@ public class BotBlack {
 				}
 			}
 		}	
-		if(board.board[13][1] != Color.BLACK){
+		if(game.board.board[13][1] != Color.BLACK){
 			for(int i=0; i<10; i++){
 				
-				if (game.legalMove3(tabPegs[i][0], tabPegs[i][1], 13, 1, player, Color.BLACK)){
+				if (game.legalMove3(tabPegs[i][0], tabPegs[i][1], 13, 1, this, Color.BLACK)){
 					if(tabPegs[i][1]>1){
 						goalMoves[0]=tabPegs[i][0];
 						goalMoves[1]=tabPegs[i][1];
@@ -71,10 +67,10 @@ public class BotBlack {
 				}
 			}
 		}		
-		if(board.board[14][2] != Color.BLACK){
+		if(game.board.board[14][2] != Color.BLACK){
 			for(int i=0; i<10; i++){
 				
-				if (game.legalMove3(tabPegs[i][0], tabPegs[i][1], 14, 2, player, Color.BLACK)){
+				if (game.legalMove3(tabPegs[i][0], tabPegs[i][1], 14, 2, this, Color.BLACK)){
 					if(tabPegs[i][1]>2){
 						goalMoves[0]=tabPegs[i][0];
 						goalMoves[1]=tabPegs[i][1];
@@ -88,10 +84,10 @@ public class BotBlack {
 				}
 			}		
 		}
-		if(board.board[12][2] != Color.BLACK){
+		if(game.board.board[12][2] != Color.BLACK){
 			for(int i=0; i<10; i++){
 				
-				if (game.legalMove3(tabPegs[i][0], tabPegs[i][1], 12, 2, player, Color.BLACK)){
+				if (game.legalMove3(tabPegs[i][0], tabPegs[i][1], 12, 2, this, Color.BLACK)){
 					if(tabPegs[i][1]>2){
 						goalMoves[0]=tabPegs[i][0];
 						goalMoves[1]=tabPegs[i][1];
@@ -105,10 +101,10 @@ public class BotBlack {
 				}
 			}		
 		}
-		if(board.board[10][2] != Color.BLACK){
+		if(game.board.board[10][2] != Color.BLACK){
 			for(int i=0; i<10; i++){
 				
-				if (game.legalMove3(tabPegs[i][0], tabPegs[i][1], 10, 2, player, Color.BLACK)){
+				if (game.legalMove3(tabPegs[i][0], tabPegs[i][1], 10, 2, this, Color.BLACK)){
 					if(tabPegs[i][1]>2){
 						goalMoves[0]=tabPegs[i][0];
 						goalMoves[1]=tabPegs[i][1];
@@ -122,10 +118,10 @@ public class BotBlack {
 				}
 			}		
 		}
-		if(board.board[9][3] != Color.BLACK){
+		if(game.board.board[9][3] != Color.BLACK){
 			for(int i=0; i<10; i++){
 				
-				if (game.legalMove3(tabPegs[i][0], tabPegs[i][1], 9, 3, player, Color.BLACK)){
+				if (game.legalMove3(tabPegs[i][0], tabPegs[i][1], 9, 3, this, Color.BLACK)){
 					if(tabPegs[i][1]>3){
 						goalMoves[0]=tabPegs[i][0];
 						goalMoves[1]=tabPegs[i][1];
@@ -139,10 +135,10 @@ public class BotBlack {
 				}
 			}		
 		}
-		if(board.board[15][3] != Color.BLACK){
+		if(game.board.board[15][3] != Color.BLACK){
 			for(int i=0; i<10; i++){
 				
-				if (game.legalMove3(tabPegs[i][0], tabPegs[i][1], 15, 3, player, Color.BLACK)){
+				if (game.legalMove3(tabPegs[i][0], tabPegs[i][1], 15, 3, this, Color.BLACK)){
 					if(tabPegs[i][1]>3){
 						goalMoves[0]=tabPegs[i][0];
 						goalMoves[1]=tabPegs[i][1];
@@ -156,10 +152,10 @@ public class BotBlack {
 				}
 			}		
 		}
-		if(board.board[11][3] != Color.BLACK){
+		if(game.board.board[11][3] != Color.BLACK){
 			for(int i=0; i<10; i++){
 				
-				if (game.legalMove3(tabPegs[i][0], tabPegs[i][1], 11, 3, player, Color.BLACK)){
+				if (game.legalMove3(tabPegs[i][0], tabPegs[i][1], 11, 3, this, Color.BLACK)){
 					if(tabPegs[i][1]>3){
 						goalMoves[0]=tabPegs[i][0];
 						goalMoves[1]=tabPegs[i][1];
@@ -173,10 +169,10 @@ public class BotBlack {
 				}
 			}		
 		}
-		if(board.board[13][3] != Color.BLACK){
+		if(game.board.board[13][3] != Color.BLACK){
 			for(int i=0; i<10; i++){
 				
-				if (game.legalMove3(tabPegs[i][0], tabPegs[i][1], 13, 3, player, Color.BLACK)){
+				if (game.legalMove3(tabPegs[i][0], tabPegs[i][1], 13, 3, this, Color.BLACK)){
 					if(tabPegs[i][1]>3){
 						goalMoves[0]=tabPegs[i][0];
 						goalMoves[1]=tabPegs[i][1];
@@ -199,11 +195,11 @@ public class BotBlack {
 		
 		for (int y = 4; y <= tabPegs[a][1]; y++) {
 			for (int x = 9; x <= 15; x++) {
-				if (game.legalMove3(tabPegs[a][0], tabPegs[a][1], x, y, player, Color.BLACK)){
+				if (game.legalMove3(tabPegs[a][0], tabPegs[a][1], x, y, this, Color.BLACK)){
 					goalMoves[0]=tabPegs[a][0];
 					goalMoves[1]=tabPegs[a][1];
-					goalMoves[2]=13;
-					goalMoves[3]=3;
+					goalMoves[2]=x;
+					goalMoves[3]=y;
 					tabPegs[a][0]=goalMoves[2];
 					tabPegs[a][1]=goalMoves[3];
 					return;
@@ -222,15 +218,64 @@ public class BotBlack {
 	public void makeTabPegs(){	
 		int[] fieldsNumberInRow2 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 2, 1};
 		int peg=0;
-		for (int y = 0; y < board.board[0].length; y++) {
+		for (int y = 0; y <17; y++) {
 	
-			int tempX2 = ((board.board.length - 1) / 2) - (fieldsNumberInRow2[y] / 2) * 2 + (y % 2);
+			int tempX2 = ((25 - 1) / 2) - (fieldsNumberInRow2[y] / 2) * 2 + (y % 2);
 			for (int i = 0; i < fieldsNumberInRow2[y]; i++) {
+				System.out.println(y + " " + i);
 				tabPegs[peg][0]=tempX2;
 				tabPegs[peg][1]=y;
 				peg++;
 				tempX2 += 2;
 			}
+		}
+	}
+
+	@Override
+	public void setColor(Color color, String colorS) {
+		this.color = color;
+		this.colorS = colorS;
+	}
+
+	@Override
+	public void otherPlayerDone(String s) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Boolean sendBoard(Color[][] board) {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public void yourMove() {
+		searchField();
+		game.move(goalMoves[0], goalMoves[1], goalMoves[2], goalMoves[3]);
+		game.playerDone(this);
+	}
+
+	@Override
+	public void end() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void youFinished() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void run() {
+		if (this == game.currentPlayer) {
+			yourMove();
+		}
+		
+		while(true) {
+			
 		}
 	}
 }
