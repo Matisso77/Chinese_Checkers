@@ -475,16 +475,30 @@ public class Game {
 				players.remove(player);
 				if (players.isEmpty()) {
 					finished = true;
+					return;
 				}
-			} else {
-				currentPlayer = currentPlayer.nextPlayer;
-				currentPlayer.yourMove();
-				for (Player p : players) {
-					p.sendBoard(board.board);
-					if (p != currentPlayer)
-						p.otherPlayerDone(currentPlayer.colorS);
+				
+				boolean flag = true;
+				for (Player p: players) {
+					if(p instanceof RealPlayer) {
+						flag = false;
+						break;
+					}
 				}
+				
+				if(flag) {
+					endGame(player);
+					return;
+				}				
 			}
+			currentPlayer = currentPlayer.nextPlayer;
+			for (Player p : players) {
+				p.sendBoard(board.board);
+				if (p != currentPlayer)
+					p.otherPlayerDone(currentPlayer.colorS);
+			}
+			currentPlayer.yourMove();
+
 		}
 	}
 	
