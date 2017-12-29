@@ -410,8 +410,8 @@ public class Game {
 			if (startX + 2 == goalX && startY - 2 == goalY 
 					&& board.board[startX + 2][startY - 2].getRGB() == Color.GRAY.getRGB()) {
 				return true;
-			} else if (startX + 2 < 25 && startY - 2 >= 0 && !((wasHere[startX+2][startY-2])
-					&& board.board[startX + 2][startY - 2].getRGB() == Color.GRAY.getRGB()))
+			} else if (startX + 2 < 25 && startY - 2 >= 0 && !(wasHere[startX+2][startY-2])
+					&& board.board[startX + 2][startY - 2].getRGB() == Color.GRAY.getRGB())
 			{
 				
 				if (legalMove(startX + 2, startY - 2, goalX, goalY))
