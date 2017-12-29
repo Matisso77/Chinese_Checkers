@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.Random;
 
 public class BotGreen extends Player {
-	int tabPegs[][];
+	private int tabPegs[][];
 	int goalMoves[];
 	Random r = new Random();
 	int a;
@@ -17,7 +17,8 @@ public class BotGreen extends Player {
 	}
 
 	private void searchField() {
-
+		
+		
 		while(true)
 		{
 			a = r.nextInt(10);
@@ -25,7 +26,7 @@ public class BotGreen extends Player {
 			
 			//System.out.println(a+ " "+tabPegs[a][0] + " " + tabPegs[a][1]);
 			for (int y = 4; y <= tabPegs[a][1] + 3; y++) {
-				for (int x = 0; x<=tabPegs[a][0]; x++) {	
+				for (int x = 0; x<=tabPegs[a][0]+1; x++) {	
 					
 					if (game.legalMove3(tabPegs[a][0], tabPegs[a][1], x, y, this, Color.GREEN)){
 						goalMoves[0]=tabPegs[a][0];
@@ -34,6 +35,10 @@ public class BotGreen extends Player {
 						goalMoves[3]=y;
 						tabPegs[a][0]=goalMoves[2];
 						tabPegs[a][1]=goalMoves[3];
+						
+						 System.out.println(a + " " + goalMoves[0]+ " " + goalMoves[1]+ " " +
+						 goalMoves[2]+ " " + goalMoves[3]);
+						
 						return;
 					}
 					
@@ -55,7 +60,8 @@ public class BotGreen extends Player {
 			for (int i = 0; i < fieldsNumberInRow64[y]; i++) {
 				tabPegs[peg][0]=tempX64;
 				tabPegs[peg][1]=y;
-				System.out.println(tabPegs[peg][0] + " " + tabPegs[peg][1]);
+				//System.out.println(tabPegs[peg][0] + " " + tabPegs[peg][1]);
+				peg++;
 				tempX64 += 2;
 				
 			}
@@ -84,9 +90,10 @@ public class BotGreen extends Player {
 
 	@Override
 	public void yourMove() {
+	
 		searchField();
 		try {
-			sleep(10);
+			sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

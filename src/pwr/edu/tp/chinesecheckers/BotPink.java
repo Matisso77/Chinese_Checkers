@@ -25,7 +25,7 @@ public class BotPink extends Player {
 			
 			
 			for (int y = 12; y >= tabPegs[a][1] - 3; y--) {
-				for (int x = 24; x>=tabPegs[a][0]; x--) {	
+				for (int x = 24; x>=tabPegs[a][0]-1; x--) {	
 					
 					if (game.legalMove3(tabPegs[a][0], tabPegs[a][1], x, y, this, Color.PINK)){
 						goalMoves[0]=tabPegs[a][0];
@@ -86,7 +86,7 @@ public class BotPink extends Player {
 	public void yourMove() {
 		searchField();
 		try {
-			sleep(10);
+			sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

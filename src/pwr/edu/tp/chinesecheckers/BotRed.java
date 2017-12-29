@@ -23,9 +23,9 @@ public class BotRed extends Player {
 			a = r.nextInt(10);
 			
 			for (int y = 12; y >= tabPegs[a][1] - 3; y--) {
-				for (int x = 0; x<tabPegs[a][0]; x++) {
+				for (int x = 0; x<tabPegs[a][0]+1; x++) {
 				
-					System.out.println(tabPegs[a][0] + " " + tabPegs[a][1]);
+					//System.out.println(tabPegs[a][0] + " " + tabPegs[a][1]);
 					if (game.legalMove3(tabPegs[a][0], tabPegs[a][1], x, y, this, Color.RED)){
 						goalMoves[0]=tabPegs[a][0];
 						goalMoves[1]=tabPegs[a][1];
@@ -33,7 +33,7 @@ public class BotRed extends Player {
 						goalMoves[3]=y;
 						tabPegs[a][0]=goalMoves[2];
 						tabPegs[a][1]=goalMoves[3];
-						System.out.println(tabPegs[a][0] + " " + tabPegs[a][1]);
+						//System.out.println(tabPegs[a][0] + " " + tabPegs[a][1]);
 						return;
 					}
 					
@@ -94,7 +94,7 @@ public class BotRed extends Player {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(goalMoves[0] + " " + goalMoves[1]);
+		//System.out.println(goalMoves[0] + " " + goalMoves[1]);
 		game.move(goalMoves[0], goalMoves[1], goalMoves[2], goalMoves[3]);
 		game.playerDone(this);
 	}
@@ -117,8 +117,13 @@ public class BotRed extends Player {
 			yourMove();
 		}
 		
-		while(true) {
-			
+		while (!dead) {
+			try {
+				sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 }

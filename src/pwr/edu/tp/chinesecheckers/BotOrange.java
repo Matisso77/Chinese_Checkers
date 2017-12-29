@@ -25,7 +25,7 @@ public class BotOrange extends Player {
 			
 			
 			for (int y = 4; y <= tabPegs[a][1] + 3; y++) {
-				for (int x = 24; x>=tabPegs[a][0]; x--) {	
+				for (int x = 24; x>=tabPegs[a][0]-1; x--) {	
 					
 					if (game.legalMove3(tabPegs[a][0], tabPegs[a][1], x, y, this, Color.ORANGE)){
 						goalMoves[0]=tabPegs[a][0];
@@ -57,6 +57,8 @@ public class BotOrange extends Player {
 			for (int i = 0; i < fieldsNumberInRow65[y]; i++) {
 				tabPegs[peg][0]=tempX65;
 				tabPegs[peg][1]=y;
+				peg++;
+				//System.out.println(tabPegs[peg][0] + " " + tabPegs[peg][1]);
 				tempX65 -= 2;
 			}
 			tempX65 = 3;
@@ -86,7 +88,7 @@ public class BotOrange extends Player {
 	public void yourMove() {
 		searchField();
 		try {
-			sleep(10);
+			sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
