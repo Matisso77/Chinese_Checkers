@@ -7,11 +7,12 @@ import org.junit.Test;
 import java.awt.Color;
 
 import pwr.edu.tp.chinesecheckers.Board;
-import pwr.edu.tp.chinesecheckers.Game;
+import pwr.edu.tp.chinesecheckers.BoardAssembler;
+import pwr.edu.tp.chinesecheckers.Players2BoardBodyBuilder;
 
 public class WinnerTEst{
-	
-	Board board = new Board(2);
+	BoardAssembler assembler = new BoardAssembler();
+	Board board = assembler.getBoard(new Players2BoardBodyBuilder());
 	//b2 is method, that makes the end stan of game - just for test if it real ends
 
 	@Test

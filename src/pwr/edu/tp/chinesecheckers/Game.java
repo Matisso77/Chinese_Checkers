@@ -15,7 +15,17 @@ public class Game {
 	public Game(int size) {
 		players = new ArrayList<Player>();
 		playersCount = size;
-		board = new Board(size);
+		BoardAssembler assembler = new BoardAssembler();
+		switch(size) {
+		case 2: board = assembler.getBoard(new Players2BoardBodyBuilder());
+			break;
+		case 3: board = assembler.getBoard(new Players3BoardBodyBuilder());
+			break;
+		case 4: board = assembler.getBoard(new Players4BoardBodyBuilder());
+			break;
+		case 6: board = assembler.getBoard(new Players6BoardBodyBuilder());
+			break;
+		}
 		wasHere = new boolean [25][17];
 		refresh();
 	}

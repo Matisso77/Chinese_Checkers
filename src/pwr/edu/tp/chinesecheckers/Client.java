@@ -26,7 +26,7 @@ public class Client {
 	private ObjectOutputStream out;
 	private JFrame frame = new JFrame("Chinese Checkers");
 	private JLabel messageLabel = new JLabel("");
-	private Board drawingArea = new Board(0);
+	private Board drawingArea;
 	private JButton button = new JButton("Done");
 
 	public Client(String serverAddress) {
@@ -107,6 +107,9 @@ public class Client {
 			}
 		});
 
+		BoardAssembler assembler = new BoardAssembler();
+		drawingArea = assembler.getBoard(new EmptyBoardBodyBuilder());
+		
 		drawingArea.addMouseListener(new MouseAdapter() {
 			int clickCounter = 0;
 			int startX, startY, goalX, goalY;
