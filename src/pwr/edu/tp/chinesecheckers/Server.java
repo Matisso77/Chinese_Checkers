@@ -27,8 +27,7 @@ public class Server {
 		}
 
 		for (Game g : toDeleteG) {
-			if (games.remove(g))
-				System.out.println("removed");
+			games.remove(g);
 		}
 
 		ArrayList<Player> toDeleteP = new ArrayList<>();
@@ -38,8 +37,7 @@ public class Server {
 		}
 
 		for (Player p : toDeleteP) {
-			if (players.remove(p))
-				System.out.println("removed");
+			players.remove(p);
 		}
 	}
 

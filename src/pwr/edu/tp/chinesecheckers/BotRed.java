@@ -89,7 +89,7 @@ public class BotRed extends Player {
 	public void yourMove() {
 		searchField();
 		try {
-			sleep(10);
+			sleep(1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -101,8 +101,7 @@ public class BotRed extends Player {
 
 	@Override
 	public void end() {
-		// TODO Auto-generated method stub
-		
+		dead = true;
 	}
 
 	@Override
