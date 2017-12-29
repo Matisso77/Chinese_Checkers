@@ -192,28 +192,35 @@ public class BotBlack extends Player {
 				}
 			}
 		}
-
+		if (game.board.board[15][3] == Color.BLACK) {
+			for (int i = 0; i < 10; i++) {
+				if(tabPegs[i][0]==12&&tabPegs[i][1]==4){
+					if (game.legalMove3(tabPegs[i][0], tabPegs[i][1], 14, 4, this, Color.BLACK)) {
+						if (tabPegs[i][1] > 3) {
+							goalMoves[0] = tabPegs[i][0];
+							goalMoves[1] = tabPegs[i][1];
+							goalMoves[2] = 14;
+							goalMoves[3] = 4;
+							tabPegs[i][0] = goalMoves[2];
+							tabPegs[i][1] = goalMoves[3];
+							return;
+						}
+					}
+				}
+			}
+		}
+		
 		while (true) {
 			a = r.nextInt(10);
 
 			while (tabPegs[a][1] <= 3) {
 				a = r.nextInt(10);
 			}
+			
 			//System.out.println(tabPegs[a][0] + " " + tabPegs[a][1]);
 			for (int y = 4; y <= tabPegs[a][1]; y++) {
 				for (int x = 9; x <= 15; x++) {
-					// System.out.println(tabPegs[a][0]+ " " + tabPegs[a][1]);
-					if(y==5)
-					{
-						if(x==10)
-						{
-							x=14;
-						}
-						if(x==14)
-						{
-							x=10;
-						}
-					}
+					
 					if (game.legalMove3(tabPegs[a][0], tabPegs[a][1], x, y, this, Color.BLACK)) {
 						goalMoves[0] = tabPegs[a][0];
 						goalMoves[1] = tabPegs[a][1];
