@@ -3,6 +3,10 @@ package pwr.edu.tp.chinesecheckers;
 import java.awt.Color;
 
 public abstract class Player extends Thread {
+	
+	public void Player(){
+		
+	}
 	public Color color;
 	String colorS;
 	Player nextPlayer;

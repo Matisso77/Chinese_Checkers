@@ -5,18 +5,19 @@ import java.util.Random;
 
 public class BotBlack extends Player {
 	int tabPegs[][];
-	int goalMoves[];
+	public int goalMoves[];
 	Random r = new Random();
 	int a;
-
+	
 	public BotBlack() {
 		tabPegs = new int[10][2];
 		goalMoves = new int[4];
-		makeTabPegs(); // Do this only once
+		makeTabPegs(); 
+		// Do this only once
 		// searchField();
 	}
 
-	private void searchField() {
+	public void searchField() {
 
 		//System.out.println("Hello");
 		if (game.board.board[12][0] != Color.BLACK) {

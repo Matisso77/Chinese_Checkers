@@ -5,7 +5,7 @@ import java.awt.Color;
 
 public class Game {
 	public Player currentPlayer;
-	Board board;
+	public Board board;
 	boolean wasHere[][];
 	ArrayList<Player> players = new ArrayList<>();
 	int playersCount;
