@@ -121,23 +121,7 @@ public class BotBlack extends Player {
 				}
 			}
 		}
-		if (game.board.board[9][3] != Color.BLACK) {
-			for (int i = 0; i < 10; i++) {
-
-				if (game.legalMove3(tabPegs[i][0], tabPegs[i][1], 9, 3, this, Color.BLACK)) {
-					if (tabPegs[i][1] > 3) {
-						goalMoves[0] = tabPegs[i][0];
-						goalMoves[1] = tabPegs[i][1];
-						goalMoves[2] = 9;
-						goalMoves[3] = 3;
-						tabPegs[i][0] = goalMoves[2];
-						tabPegs[i][1] = goalMoves[3];
-						return;
-					}
-
-				}
-			}
-		}
+		
 		if (game.board.board[15][3] != Color.BLACK) {
 			for (int i = 0; i < 10; i++) {
 
@@ -155,6 +139,25 @@ public class BotBlack extends Player {
 				}
 			}
 		}
+		
+		if (game.board.board[9][3] != Color.BLACK) {
+			for (int i = 0; i < 10; i++) {
+
+				if (game.legalMove3(tabPegs[i][0], tabPegs[i][1], 9, 3, this, Color.BLACK)) {
+					if (tabPegs[i][1] > 3) {
+						goalMoves[0] = tabPegs[i][0];
+						goalMoves[1] = tabPegs[i][1];
+						goalMoves[2] = 9;
+						goalMoves[3] = 3;
+						tabPegs[i][0] = goalMoves[2];
+						tabPegs[i][1] = goalMoves[3];
+						return;
+					}
+
+				}
+			}
+		}
+		
 		if (game.board.board[11][3] != Color.BLACK) {
 			for (int i = 0; i < 10; i++) {
 

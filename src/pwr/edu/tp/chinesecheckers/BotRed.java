@@ -22,9 +22,10 @@ public class BotRed extends Player {
 		{
 			a = r.nextInt(10);
 			
-			for (int x = 0; x<tabPegs[a][0]+1; x++) {
-				for (int y = 12; y >= tabPegs[a][1] + 3; y--) {
+			for (int y = 12; y >= tabPegs[a][1] - 3; y--) {
+				for (int x = 0; x<tabPegs[a][0]; x++) {
 				
+					System.out.println(tabPegs[a][0] + " " + tabPegs[a][1]);
 					if (game.legalMove3(tabPegs[a][0], tabPegs[a][1], x, y, this, Color.RED)){
 						goalMoves[0]=tabPegs[a][0];
 						goalMoves[1]=tabPegs[a][1];
@@ -32,6 +33,7 @@ public class BotRed extends Player {
 						goalMoves[3]=y;
 						tabPegs[a][0]=goalMoves[2];
 						tabPegs[a][1]=goalMoves[3];
+						System.out.println(tabPegs[a][0] + " " + tabPegs[a][1]);
 						return;
 					}
 					
@@ -48,7 +50,7 @@ public class BotRed extends Player {
 		int temp_vector32 = 0;
 		int tempX32 = 24;
 		int peg = 0;
-		for (int y = 0; y < game.board.board[0].length; y++) {
+		for (int y = 0; y < 17; y++) {
 
 			tempX32 -= temp_vector32;
 			if (fieldsNumberInRow32[y] != 0)
@@ -92,6 +94,7 @@ public class BotRed extends Player {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(goalMoves[0] + " " + goalMoves[1]);
 		game.move(goalMoves[0], goalMoves[1], goalMoves[2], goalMoves[3]);
 		game.playerDone(this);
 	}
