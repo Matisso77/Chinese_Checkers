@@ -203,7 +203,17 @@ public class BotBlack extends Player {
 			for (int y = 4; y <= tabPegs[a][1]; y++) {
 				for (int x = 9; x <= 15; x++) {
 					// System.out.println(tabPegs[a][0]+ " " + tabPegs[a][1]);
-
+					if(y==5)
+					{
+						if(x==10)
+						{
+							x=14;
+						}
+						if(x==14)
+						{
+							x=10;
+						}
+					}
 					if (game.legalMove3(tabPegs[a][0], tabPegs[a][1], x, y, this, Color.BLACK)) {
 						goalMoves[0] = tabPegs[a][0];
 						goalMoves[1] = tabPegs[a][1];
