@@ -1,59 +1,53 @@
 package pwr.edu.tp.chinesecheckers.test;
 
 import static org.junit.Assert.*;
-
+import java.awt.Color;
 import org.junit.Test;
-
-import pwr.edu.tp.chinesecheckers.OldBoard;
-import pwr.edu.tp.chinesecheckers.OldBoard.Fields;
+import pwr.edu.tp.chinesecheckers.*;
 
 public class Peg_Test {
 
 	@Test
 	public void test_b2() {
-		
-		OldBoard b2 = new OldBoard(2);
-		assertEquals(b2.board[0][0], Fields.NOTUSED);
-		assertEquals(b2.board[12][0], Fields.FULL);
-		assertEquals(b2.board[12][6], Fields.EMPTY);
-		assertEquals(b2.board[11][1], Fields.FULL);
-		assertEquals(b2.board[22][4], Fields.EMPTY);
+		BoardAssembler assembler = new BoardAssembler();
+		Board b2 = assembler.getBoard(new Players2BoardBodyBuilder());
+		assertEquals(b2.board[0][0], Color.WHITE);
+		assertEquals(b2.board[12][0], Color.BLUE);
+		assertEquals(b2.board[12][6], Color.GRAY);
+		assertEquals(b2.board[11][1], Color.BLUE);
+		assertEquals(b2.board[22][4], Color.GRAY);
 	}
 	
 	@Test
 	public void test_b3() {
-		
-		OldBoard b3 = new OldBoard(3);
-	
-		assertEquals(b3.board[0][0], Fields.NOTUSED);
-		assertEquals(b3.board[12][0], Fields.EMPTY);
-		assertEquals(b3.board[12][6], Fields.EMPTY);
-		assertEquals(b3.board[11][1], Fields.EMPTY);
-		assertEquals(b3.board[22][4], Fields.FULL);
+		BoardAssembler assembler = new BoardAssembler();
+		Board b3 = assembler.getBoard(new Players3BoardBodyBuilder());
+		assertEquals(b3.board[0][0], Color.WHITE);
+		assertEquals(b3.board[12][0], Color.GRAY);
+		assertEquals(b3.board[12][6], Color.GRAY);
+		assertEquals(b3.board[11][1], Color.GRAY);
+		assertEquals(b3.board[22][4], Color.RED);
 	}
 	
 	@Test
 	public void test_b4() {
-
-		OldBoard b4 = new OldBoard(4);
-		assertEquals(b4.board[0][0], Fields.NOTUSED);
-		assertEquals(b4.board[11][1], Fields.EMPTY);
-		assertEquals(b4.board[12][6], Fields.EMPTY);
-		assertEquals(b4.board[11][1], Fields.EMPTY);
-		assertEquals(b4.board[22][4], Fields.FULL);
+		BoardAssembler assembler = new BoardAssembler();
+		Board b4 = assembler.getBoard(new Players4BoardBodyBuilder());
+		assertEquals(b4.board[0][0], Color.WHITE);
+		assertEquals(b4.board[11][1], Color.GRAY);
+		assertEquals(b4.board[12][6], Color.GRAY);
+		assertEquals(b4.board[11][1], Color.GRAY);
+		assertEquals(b4.board[22][4], Color.RED);
 	}
 	
 	@Test
 	public void test_b6() {
-
-		OldBoard b6 = new OldBoard(6);
-		assertEquals(b6.board[0][0], Fields.NOTUSED);
-		assertEquals(b6.board[12][0], Fields.FULL);
-		assertEquals(b6.board[12][6], Fields.EMPTY);
-		assertEquals(b6.board[11][1], Fields.FULL);
-		assertEquals(b6.board[22][4], Fields.FULL);
+		BoardAssembler assembler = new BoardAssembler();
+		Board b6 = assembler.getBoard(new Players6BoardBodyBuilder());
+		assertEquals(b6.board[0][0], Color.WHITE);
+		assertEquals(b6.board[12][0], Color.BLUE);
+		assertEquals(b6.board[12][6], Color.GRAY);
+		assertEquals(b6.board[11][1], Color.BLUE);
+		assertEquals(b6.board[22][4], Color.RED);
 	}
-	
-	
-
 }
