@@ -11,12 +11,21 @@ public class Server {
 	ServerSocket listener;
 	ArrayList<Game> games = new ArrayList<>();
 	ArrayList<Player> players = new ArrayList<>();
+	private volatile static Server instance;
+	
+	public static Server getInstance() {
+		if (instance == null) {
+			synchronized (Server.class) {
+				instance = new Server();
+			}
+		}
+		return instance;
+	}
 
 	public static void main(String[] args) throws Exception {
-		Server server = new Server();
-		server.startListening();
-		server.games = new ArrayList<Game>();
-		server.startAllocating();
+		Server.getInstance().startListening();
+		Server.getInstance().games = new ArrayList<Game>();
+		Server.getInstance().startAllocating();
 	}
 
 	public void clean() {
