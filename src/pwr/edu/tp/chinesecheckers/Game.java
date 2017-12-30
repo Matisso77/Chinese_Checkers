@@ -42,13 +42,13 @@ public class Game {
 	public boolean hasWinner(Color color) {
 		int winner;
 		winner = 0;
-		if (color == Color.BLACK) {
+		if (color.getRGB() == Color.BLACK.getRGB()) {
 			int[] fieldsNumberInRow61 = { 1, 2, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 			for (int y = 0; y < board.board[0].length; y++) {
 
 				int tempX = ((board.board.length - 1) / 2) - (fieldsNumberInRow61[y] / 2) * 2 + (y % 2);
 				for (int i = 0; i < fieldsNumberInRow61[y]; i++) {
-					if (board.board[tempX][y] == Color.BLACK){
+					if (board.board[tempX][y].getRGB() == Color.BLACK.getRGB()){
 						winner++;
 					}
 					tempX += 2;
@@ -61,13 +61,13 @@ public class Game {
 			}
 		}
 
-		else if (color == Color.BLUE) {
+		else if (color.getRGB() == Color.BLUE.getRGB()) {
 			int[] fieldsNumberInRow61 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 2, 1 };
 			for (int y = 0; y < board.board[0].length; y++) {
 
 				int tempX = ((board.board.length - 1) / 2) - (fieldsNumberInRow61[y] / 2) * 2 + (y % 2);
 				for (int i = 0; i < fieldsNumberInRow61[y]; i++) {
-					if (board.board[tempX][y] == Color.BLUE){
+					if (board.board[tempX][y].getRGB() == Color.BLUE.getRGB()){
 						winner++;
 					}
 					tempX += 2;
@@ -77,7 +77,7 @@ public class Game {
 					return true;
 				}
 			}
-		} else if (color == Color.ORANGE) {
+		} else if (color.getRGB() == Color.ORANGE.getRGB()) {
 			int[] fieldsNumberInRow62 = { 0, 0, 0, 0, 4, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 			int temp_vector62 = 0;
 			int tempX62 = 24;
@@ -87,7 +87,7 @@ public class Game {
 				if (fieldsNumberInRow62[y] != 0)
 					temp_vector62++;
 				for (int i = 0; i < fieldsNumberInRow62[y]; i++) {
-					if (board.board[tempX62][y] == Color.ORANGE)
+					if (board.board[tempX62][y].getRGB() == Color.ORANGE.getRGB())
 						winner++;
 					tempX62 -= 2;
 				}
@@ -97,7 +97,7 @@ public class Game {
 					return true;
 				}
 			}
-		} else if (color == Color.GREEN) {
+		} else if (color.getRGB() == Color.GREEN.getRGB()) {
 			int[] fieldsNumberInRow63 = { 0, 0, 0, 0, 4, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 			int temp_vector63 = 0;
 			int tempX63 = 0;
@@ -107,7 +107,7 @@ public class Game {
 				if (fieldsNumberInRow63[y] != 0)
 					temp_vector63++;
 				for (int i = 0; i < fieldsNumberInRow63[y]; i++) {
-					if (board.board[tempX63][y] == Color.GREEN){
+					if (board.board[tempX63][y].getRGB() == Color.GREEN.getRGB()){
 						winner++;
 					}
 					tempX63 += 2;
@@ -118,7 +118,7 @@ public class Game {
 					return true;
 				}
 			}
-		} else if (color == Color.PINK) {
+		} else if (color.getRGB() == Color.PINK.getRGB()) {
 			int[] fieldsNumberInRow64 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 0, 0, 0, 0 };
 			int temp_vector64 = 0;
 			int tempX64 = 21;
@@ -128,7 +128,7 @@ public class Game {
 				if (fieldsNumberInRow64[y] != 0)
 					temp_vector64++;
 				for (int i = 0; i < fieldsNumberInRow64[y]; i++) {
-					if (board.board[tempX64][y] == Color.PINK){
+					if (board.board[tempX64][y].getRGB() == Color.PINK.getRGB()){
 						winner++;
 					}
 					tempX64 += 2;
@@ -139,7 +139,7 @@ public class Game {
 					return true;
 				}
 			}
-		} else if (color == Color.RED) {
+		} else if (color.getRGB() == Color.RED.getRGB()) {
 			int[] fieldsNumberInRow65 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 0, 0, 0, 0 };
 			int temp_vector65 = 0;
 			int tempX65 = 3;
@@ -149,7 +149,7 @@ public class Game {
 				if (fieldsNumberInRow65[y] != 0)
 					temp_vector65++;
 				for (int i = 0; i < fieldsNumberInRow65[y]; i++) {
-					if (board.board[tempX65][y] == Color.RED){
+					if (board.board[tempX65][y].getRGB() == Color.RED.getRGB()){
 						winner++;
 					}
 
