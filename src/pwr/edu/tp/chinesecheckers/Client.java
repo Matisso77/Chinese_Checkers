@@ -247,6 +247,8 @@ public class Client {
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
+					JOptionPane.showMessageDialog(null, "You finished!", "Wow", JOptionPane.INFORMATION_MESSAGE);
+					System.exit(0);
 					break;
 				}				
 			} else if (obj instanceof int[][]) {

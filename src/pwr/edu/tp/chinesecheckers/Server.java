@@ -63,7 +63,7 @@ public class Server {
 	public void startAllocating() {
 		while (true) {
 			clean();
-			System.out.println("Gier na serwerze: " + games.size() + " graczy na serwerze: " + players.size());
+			System.out.println("Games on the server: " + games.size() + " Players online: " + players.size());
 			try {
 				players.add(new RealPlayer(listener.accept()));
 			} catch (Exception e) {
