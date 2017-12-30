@@ -21,10 +21,13 @@ public class Server {
 		}
 		return instance;
 	}
+	
+	public static void resetInstance() {
+		instance = null;
+	}
 
 	public static void main(String[] args) throws Exception {
 		Server.getInstance().startListening();
-		Server.getInstance().games = new ArrayList<Game>();
 		Server.getInstance().startAllocating();
 	}
 
@@ -61,7 +64,7 @@ public class Server {
 	}
 
 	public void startAllocating() {
-		while (true) {
+		while (!Thread.currentThread().isInterrupted()) {
 			clean();
 			System.out.println("Games on the server: " + games.size() + " Players online: " + players.size());
 			try {
@@ -168,12 +171,6 @@ public class Server {
 				for (Game g : games) {
 					if (g.playersCount == number) {
 						if (g.started == false) {
-							for (Player p : g.players) {
-								if (p.dead) {
-									games.remove(g);
-									continue;
-								}
-							}
 							game = g;
 							break;
 						}
@@ -245,7 +242,8 @@ public class Server {
 
 	public void finalize() {
 		try {
-			listener.close();
+			if(listener != null)
+				listener.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.exit(1);
