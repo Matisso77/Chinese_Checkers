@@ -39,16 +39,17 @@ public class Board extends JPanel {
 				}
 			}
 		}
-		
+
 		if ((activeX != (-1)) && (activeY != (-1))) {
 			Stroke oldStroke = g2d.getStroke();
-            g2d.setStroke(new BasicStroke(2));
-            if (board[activeX][activeY].getRGB() == Color.BLACK.getRGB())
-                g2d.setPaint(Color.YELLOW);
-            else
-                g2d.setPaint(Color.BLACK);
-			g2d.draw(new Ellipse2D.Double((10 + activeX * fieldWidth / 1.73), 10 + activeY * fieldWidth, fieldWidth, fieldWidth));
-            g2d.setStroke(oldStroke);
+			g2d.setStroke(new BasicStroke(2));
+			if (board[activeX][activeY].getRGB() == Color.BLACK.getRGB())
+				g2d.setPaint(Color.YELLOW);
+			else
+				g2d.setPaint(Color.BLACK);
+			g2d.draw(new Ellipse2D.Double((10 + activeX * fieldWidth / 1.73), 10 + activeY * fieldWidth, fieldWidth,
+					fieldWidth));
+			g2d.setStroke(oldStroke);
 		}
 	}
 }

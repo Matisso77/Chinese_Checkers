@@ -17,17 +17,15 @@ public class Players6BoardBodyBuilder implements BoardBodyBuilder {
 
 		int[] fieldsNumberInRow = { 1, 2, 3, 4, 13, 12, 11, 10, 9, 10, 11, 12, 13, 4, 3, 2, 1 };
 		for (int y = 0; y < board[0].length; y++) {
-
 			int tempX = ((board.length - 1) / 2) - (fieldsNumberInRow[y] / 2) * 2 + (y % 2);
 			for (int i = 0; i < fieldsNumberInRow[y]; i++) {
 				board[tempX][y] = Color.GRAY;
 				tempX += 2;
 			}
 		}
-		
+
 		int[] fieldsNumberInRow61 = { 1, 2, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 2, 1 };
 		for (int y = 0; y < board[0].length; y++) {
-
 			int tempX = ((board.length - 1) / 2) - (fieldsNumberInRow61[y] / 2) * 2 + (y % 2);
 			for (int i = 0; i < fieldsNumberInRow61[y]; i++) {
 				if (y < 5) {
@@ -43,7 +41,6 @@ public class Players6BoardBodyBuilder implements BoardBodyBuilder {
 		int temp_vector62 = 0;
 		int tempX62 = 24;
 		for (int y = 0; y < board[0].length; y++) {
-
 			tempX62 -= temp_vector62;
 			if (fieldsNumberInRow62[y] != 0)
 				temp_vector62++;
@@ -52,14 +49,12 @@ public class Players6BoardBodyBuilder implements BoardBodyBuilder {
 				tempX62 -= 2;
 			}
 			tempX62 = 24;
-
 		}
 
 		int[] fieldsNumberInRow63 = { 0, 0, 0, 0, 4, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 		int temp_vector63 = 0;
 		int tempX63 = 0;
 		for (int y = 0; y < board[0].length; y++) {
-
 			tempX63 += temp_vector63;
 			if (fieldsNumberInRow63[y] != 0)
 				temp_vector63++;
@@ -68,13 +63,11 @@ public class Players6BoardBodyBuilder implements BoardBodyBuilder {
 				tempX63 += 2;
 			}
 			tempX63 = 0;
-
 		}
 		int[] fieldsNumberInRow64 = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2, 3, 4, 0, 0, 0, 0 };
 		int temp_vector64 = 0;
 		int tempX64 = 21;
 		for (int y = 0; y < board[0].length; y++) {
-
 			tempX64 -= temp_vector64;
 			if (fieldsNumberInRow64[y] != 0)
 				temp_vector64++;
@@ -90,7 +83,6 @@ public class Players6BoardBodyBuilder implements BoardBodyBuilder {
 		int temp_vector65 = 0;
 		int tempX65 = 3;
 		for (int y = 0; y < board[0].length; y++) {
-
 			tempX65 += temp_vector65;
 			if (fieldsNumberInRow65[y] != 0)
 				temp_vector65++;
@@ -99,7 +91,6 @@ public class Players6BoardBodyBuilder implements BoardBodyBuilder {
 				tempX65 -= 2;
 			}
 			tempX65 = 3;
-
 		}
 	}
 

@@ -10,7 +10,7 @@ public class RealPlayer extends Player {
 	private Socket socket;
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
-	
+
 	public RealPlayer(Socket socket) {
 		this.socket = socket;
 		try {
@@ -38,7 +38,7 @@ public class RealPlayer extends Player {
 		}
 		if (object2 instanceof String) {
 			String bots = (String) object2;
-			if(bots.equals("YES"))
+			if (bots.equals("YES"))
 				wantsBots = true;
 		}
 	}
@@ -56,7 +56,7 @@ public class RealPlayer extends Player {
 			System.out.println("Player died: " + e);
 			game.endGame(this);
 			dead = true;
-		}		
+		}
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class RealPlayer extends Player {
 			e.printStackTrace();
 			game.endGame(this);
 			dead = true;
-		}		
+		}
 	}
 
 	@Override
@@ -100,7 +100,7 @@ public class RealPlayer extends Player {
 			e.printStackTrace();
 			game.endGame(this);
 			dead = true;
-		}		
+		}
 	}
 
 	@Override
@@ -111,7 +111,7 @@ public class RealPlayer extends Player {
 		} catch (IOException e) {
 			e.printStackTrace();
 			dead = true;
-		}		
+		}
 	}
 
 	@Override
@@ -128,7 +128,7 @@ public class RealPlayer extends Player {
 
 	@Override
 	public void run() {
-		if(!sendBoard(game.board.board))
+		if (!sendBoard(game.board.board))
 			return;
 		try {
 			out.writeObject("MESSAGE All players connected");
@@ -139,7 +139,7 @@ public class RealPlayer extends Player {
 			game.endGame(this);
 			dead = true;
 		}
-	
+
 		if (this == game.currentPlayer) {
 			yourMove();
 		}
@@ -160,7 +160,7 @@ public class RealPlayer extends Player {
 				dead = true;
 				break;
 			}
-			
+
 			if (obj instanceof String) {
 				command = (String) obj;
 				if (command.startsWith("MOVE")) {

@@ -1,7 +1,6 @@
 package pwr.edu.tp.chinesecheckers.test;
 
 import static org.junit.Assert.*;
-
 import java.awt.Color;
 import org.junit.Test;
 import pwr.edu.tp.chinesecheckers.BotBlack;
@@ -23,6 +22,7 @@ public class BotTests {
 		botBlack.searchField();
 		assertNotEquals(botBlack.goalMoves[0], 1);
 	}
+
 	@Test
 	public void test2() {
 		Game game = new Game(6);
@@ -32,6 +32,7 @@ public class BotTests {
 		botBlue.searchField();
 		assertNotEquals(botBlue.goalMoves[0], 1);
 	}
+
 	@Test
 	public void test3() {
 		Game game = new Game(6);
@@ -41,6 +42,7 @@ public class BotTests {
 		botOrange.searchField();
 		assertNotEquals(botOrange.goalMoves[0], 1);
 	}
+
 	@Test
 	public void test4() {
 		Game game = new Game(6);
@@ -50,6 +52,7 @@ public class BotTests {
 		botGreen.searchField();
 		assertNotEquals(botGreen.goalMoves[0], 1);
 	}
+
 	@Test
 	public void test5() {
 		Game game = new Game(6);
@@ -59,6 +62,7 @@ public class BotTests {
 		botRed.searchField();
 		assertNotEquals(botRed.goalMoves[0], 1);
 	}
+
 	@Test
 	public void test6() {
 		Game game = new Game(6);

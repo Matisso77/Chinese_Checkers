@@ -15,7 +15,7 @@ public class ServerTest {
 		Server.getInstance().finalize();
 		Server.resetInstance();
 	}
-	
+
 	@Test
 	public void initTest() {
 		assertNotNull(Server.getInstance());
@@ -60,7 +60,7 @@ public class ServerTest {
 		} catch (IOException | ClassNotFoundException e) {
 		}
 	}
-	
+
 	@Test
 	public void allocatingTest2() {
 		Thread thread1 = new Thread() {
@@ -83,7 +83,7 @@ public class ServerTest {
 		} catch (IOException | ClassNotFoundException e) {
 		}
 	}
-	
+
 	@Test
 	public void allocatingTest3() {
 		Thread thread1 = new Thread() {
@@ -106,7 +106,7 @@ public class ServerTest {
 		} catch (IOException | ClassNotFoundException e) {
 		}
 	}
-	
+
 	@Test
 	public void allocatingTest4() {
 		Thread thread1 = new Thread() {
@@ -129,7 +129,7 @@ public class ServerTest {
 		} catch (IOException | ClassNotFoundException e) {
 		}
 	}
-	
+
 	@Test
 	public void allocatingTest5() {
 		Thread thread1 = new Thread() {
@@ -160,7 +160,7 @@ public class ServerTest {
 		} catch (IOException | ClassNotFoundException e) {
 		}
 	}
-	
+
 	@Test
 	public void allocatingTest6() {
 		Thread thread1 = new Thread() {
@@ -199,7 +199,7 @@ public class ServerTest {
 		} catch (IOException | ClassNotFoundException e) {
 		}
 	}
-	
+
 	@Test
 	public void allocatingTest7() {
 		Thread thread1 = new Thread() {

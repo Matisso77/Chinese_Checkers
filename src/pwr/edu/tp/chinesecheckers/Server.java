@@ -12,7 +12,7 @@ public class Server {
 	ArrayList<Game> games = new ArrayList<>();
 	ArrayList<Player> players = new ArrayList<>();
 	private volatile static Server instance;
-	
+
 	public static Server getInstance() {
 		if (instance == null) {
 			synchronized (Server.class) {
@@ -21,7 +21,7 @@ public class Server {
 		}
 		return instance;
 	}
-	
+
 	public static void resetInstance() {
 		instance = null;
 	}
@@ -242,7 +242,7 @@ public class Server {
 
 	public void finalize() {
 		try {
-			if(listener != null)
+			if (listener != null)
 				listener.close();
 		} catch (IOException e) {
 			e.printStackTrace();

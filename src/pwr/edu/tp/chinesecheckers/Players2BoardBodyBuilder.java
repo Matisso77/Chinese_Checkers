@@ -17,17 +17,15 @@ public class Players2BoardBodyBuilder implements BoardBodyBuilder {
 
 		int[] fieldsNumberInRow = { 1, 2, 3, 4, 13, 12, 11, 10, 9, 10, 11, 12, 13, 4, 3, 2, 1 };
 		for (int y = 0; y < board[0].length; y++) {
-
 			int tempX = ((board.length - 1) / 2) - (fieldsNumberInRow[y] / 2) * 2 + (y % 2);
 			for (int i = 0; i < fieldsNumberInRow[y]; i++) {
 				board[tempX][y] = Color.GRAY;
 				tempX += 2;
 			}
 		}
-		
+
 		int[] fieldsNumberInRow2 = { 1, 2, 3, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 3, 2, 1 };
 		for (int y = 0; y < board[0].length; y++) {
-
 			int tempX2 = ((board.length - 1) / 2) - (fieldsNumberInRow2[y] / 2) * 2 + (y % 2);
 			for (int i = 0; i < fieldsNumberInRow2[y]; i++) {
 				if (y < 5) {

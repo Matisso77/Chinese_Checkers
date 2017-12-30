@@ -58,7 +58,7 @@ public class Client {
 			e.printStackTrace();
 			System.exit(1);
 		}
-		
+
 		Object[] possibilities = { 2, 3, 4, 6 };
 		int s;
 		Object o = null;
@@ -67,13 +67,13 @@ public class Client {
 					"Choose number of players", JOptionPane.PLAIN_MESSAGE, null, possibilities, 2);
 		} while (o == null);
 		s = (int) o;
-		
+
 		String bots = "NO";
 		if (JOptionPane.showConfirmDialog(frame, "Do you want to play with bots?", "How about bots?",
-		        JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-		    bots = "YES";
-		} 
-		
+				JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+			bots = "YES";
+		}
+
 		try {
 			out.writeObject(s);
 			out.writeObject(bots);
@@ -109,7 +109,7 @@ public class Client {
 
 		BoardAssembler assembler = new BoardAssembler();
 		drawingArea = assembler.getBoard(new EmptyBoardBodyBuilder());
-		
+
 		drawingArea.addMouseListener(new MouseAdapter() {
 			int clickCounter = 0;
 			int startX, startY, goalX, goalY;
@@ -228,7 +228,7 @@ public class Client {
 					break;
 				} else if (response.startsWith("MESSAGE")) {
 					messageLabel.setText(response.substring(8));
-					if(messageLabel.getText().equals("You moved"))
+					if (messageLabel.getText().equals("You moved"))
 						button.doClick();
 				} else if (response.startsWith("YOUR_MOVE")) {
 					drawingArea.repaint();
@@ -238,7 +238,7 @@ public class Client {
 					messageLabel.setText(tempColor + "'s move");
 				} else if (response.startsWith("ENABLE_BUTTON")) {
 					button.setEnabled(true);
-				}else if (response.startsWith("YOU_FINISHED")) {
+				} else if (response.startsWith("YOU_FINISHED")) {
 					button.setEnabled(false);
 					messageLabel.setText("you finished");
 					try {
@@ -250,7 +250,7 @@ public class Client {
 					JOptionPane.showMessageDialog(null, "You finished!", "Wow", JOptionPane.INFORMATION_MESSAGE);
 					System.exit(0);
 					break;
-				}				
+				}
 			} else if (obj instanceof int[][]) {
 				for (int y = 0; y < drawingArea.board[0].length; y++) {
 					for (int x = 0; x < drawingArea.board.length; x++) {
@@ -261,7 +261,7 @@ public class Client {
 			}
 		}
 	}
-	
+
 	public void end() {
 		JOptionPane.showMessageDialog(null, "Game ended!", "ERROR", JOptionPane.ERROR_MESSAGE);
 		try {

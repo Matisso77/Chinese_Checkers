@@ -8,21 +8,17 @@ public class BotBlack extends Player {
 	public int goalMoves[];
 	Random r = new Random();
 	int a;
-	
+
 	public BotBlack() {
 		tabPegs = new int[10][2];
 		goalMoves = new int[4];
-		makeTabPegs(); 
-		// Do this only once
-		// searchField();
+		makeTabPegs();
 	}
 
 	public void searchField() {
-
-		
 		if (game.board.board[9][3] == Color.BLACK) {
 			for (int i = 0; i < 10; i++) {
-				if(tabPegs[i][0]==12&&tabPegs[i][1]==4){
+				if (tabPegs[i][0] == 12 && tabPegs[i][1] == 4) {
 					if (game.legalMove3(tabPegs[i][0], tabPegs[i][1], 14, 4, this, Color.BLACK)) {
 						if (tabPegs[i][1] > 3) {
 							goalMoves[0] = tabPegs[i][0];
@@ -37,39 +33,27 @@ public class BotBlack extends Player {
 				}
 			}
 		}
-		
+
 		while (true) {
 			a = r.nextInt(10);
 
-			
-			
-			
 			for (int y = 0; y <= tabPegs[a][1]; y++) {
 				for (int x = 9; x <= 15; x++) {
-					
+
 					if (game.legalMove3(tabPegs[a][0], tabPegs[a][1], x, y, this, Color.BLACK)) {
 						goalMoves[0] = tabPegs[a][0];
 						goalMoves[1] = tabPegs[a][1];
 						goalMoves[2] = x;
 						goalMoves[3] = y;
 
-						
-
 						tabPegs[a][0] = x;
 						tabPegs[a][1] = y;
 
-					
-
-					
-
 						return;
 					}
-
 				}
 			}
-
 		}
-
 	}
 
 	public void makeTabPegs() {
