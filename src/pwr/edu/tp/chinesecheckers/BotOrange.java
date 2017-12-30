@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class BotOrange extends Player {
 	int tabPegs[][];
-	int goalMoves[];
+	public int goalMoves[];
 	Random r = new Random();
 	int a;
 
@@ -16,7 +16,7 @@ public class BotOrange extends Player {
 		// searchField();
 	}
 
-	private void searchField() {
+	public void searchField() {
 
 		while(true)
 		{

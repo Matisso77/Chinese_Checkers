@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class BotRed extends Player {
 	int tabPegs[][];
-	int goalMoves[];
+	public int goalMoves[];
 	Random r = new Random(); 
 	int a;
 	
@@ -15,7 +15,7 @@ public class BotRed extends Player {
 		makeTabPegs();
 	}
 	
-	private void searchField() {
+	public void searchField() {
 		
 		
 		while(true)
