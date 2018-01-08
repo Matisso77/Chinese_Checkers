@@ -3,8 +3,6 @@ package pwr.edu.tp.chinesecheckers;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.ArrayList;
-import java.util.Random;
-import java.awt.Color;
 
 public class Server {
 	private static int port = 8901;
@@ -68,174 +66,11 @@ public class Server {
 			clean();
 			System.out.println("Games on the server: " + games.size() + " Players online: " + players.size());
 			try {
-				players.add(new RealPlayer(listener.accept()));
+				PlayerHandler ph = new PlayerHandler(listener.accept());
+				ph.start();
 			} catch (Exception e) {
 				e.printStackTrace();
 				continue;
-			}
-
-			Game game = null;
-			int number = players.get(players.size() - 1).desiredNumber;
-
-			if (players.get(players.size() - 1).wantsBots) {
-				game = new Game(number);
-				games.add(game);
-
-				if (number == 2) {
-					players.get(players.size() - 1).setColor(Color.BLUE, "BLUE");
-					players.get(players.size() - 1).setGame(game);
-					game.players.add(players.get(players.size() - 1));
-
-					players.add(new BotBlack());
-					players.get(players.size() - 1).setColor(Color.BLACK, "BLACK");
-					players.get(players.size() - 1).setGame(game);
-					game.players.add(players.get(players.size() - 1));
-				} else if (number == 3) {
-					players.get(players.size() - 1).setColor(Color.RED, "RED");
-					players.get(players.size() - 1).setGame(game);
-					game.players.add(players.get(players.size() - 1));
-
-					players.add(new BotBlack());
-					players.get(players.size() - 1).setColor(Color.BLACK, "BLACK");
-					players.get(players.size() - 1).setGame(game);
-					game.players.add(players.get(players.size() - 1));
-
-					players.add(new BotPink());
-					players.get(players.size() - 1).setColor(Color.PINK, "PINK");
-					players.get(players.size() - 1).setGame(game);
-					game.players.add(players.get(players.size() - 1));
-				} else if (number == 4) {
-					players.get(players.size() - 1).setColor(Color.RED, "RED");
-					players.get(players.size() - 1).setGame(game);
-					game.players.add(players.get(players.size() - 1));
-
-					players.add(new BotGreen());
-					players.get(players.size() - 1).setColor(Color.GREEN, "GREEN");
-					players.get(players.size() - 1).setGame(game);
-					game.players.add(players.get(players.size() - 1));
-
-					players.add(new BotOrange());
-					players.get(players.size() - 1).setColor(Color.ORANGE, "ORANGE");
-					players.get(players.size() - 1).setGame(game);
-					game.players.add(players.get(players.size() - 1));
-
-					players.add(new BotPink());
-					players.get(players.size() - 1).setColor(Color.PINK, "PINK");
-					players.get(players.size() - 1).setGame(game);
-					game.players.add(players.get(players.size() - 1));
-				} else if (number == 6) {
-					players.get(players.size() - 1).setColor(Color.BLUE, "BLUE");
-					players.get(players.size() - 1).setGame(game);
-					game.players.add(players.get(players.size() - 1));
-
-					players.add(new BotRed());
-					players.get(players.size() - 1).setColor(Color.RED, "RED");
-					players.get(players.size() - 1).setGame(game);
-					game.players.add(players.get(players.size() - 1));
-
-					players.add(new BotGreen());
-					players.get(players.size() - 1).setColor(Color.GREEN, "GREEN");
-					players.get(players.size() - 1).setGame(game);
-					game.players.add(players.get(players.size() - 1));
-
-					players.add(new BotBlack());
-					players.get(players.size() - 1).setColor(Color.BLACK, "BLACK");
-					players.get(players.size() - 1).setGame(game);
-					game.players.add(players.get(players.size() - 1));
-
-					players.add(new BotOrange());
-					players.get(players.size() - 1).setColor(Color.ORANGE, "ORANGE");
-					players.get(players.size() - 1).setGame(game);
-					game.players.add(players.get(players.size() - 1));
-
-					players.add(new BotPink());
-					players.get(players.size() - 1).setColor(Color.PINK, "PINK");
-					players.get(players.size() - 1).setGame(game);
-					game.players.add(players.get(players.size() - 1));
-				} else
-					continue;
-
-				for (int i = 0; i < game.players.size() - 1; i++)
-					game.players.get(i).setNextPlayer(game.players.get(i + 1));
-				game.players.get(game.players.size() - 1).setNextPlayer(game.players.get(0));
-
-				Random generator = new Random();
-				int randomIndex = generator.nextInt(game.players.size());
-				game.currentPlayer = game.players.get(randomIndex);
-
-				for (Player p : game.players) {
-					p.start();
-				}
-				game.started = true;
-			} else {
-				for (Game g : games) {
-					if (g.playersCount == number) {
-						if (g.started == false) {
-							game = g;
-							break;
-						}
-					}
-				}
-
-				if (game == null) {
-					game = new Game(number);
-					games.add(game);
-				}
-
-				if (number == 2) {
-					if (game.players.size() == 0)
-						players.get(players.size() - 1).setColor(Color.BLUE, "BLUE");
-					else if (game.players.size() == 1)
-						players.get(players.size() - 1).setColor(Color.BLACK, "BLACK");
-				} else if (number == 3) {
-					if (game.players.size() == 0)
-						players.get(players.size() - 1).setColor(Color.RED, "RED");
-					else if (game.players.size() == 1)
-						players.get(players.size() - 1).setColor(Color.BLACK, "BLACK");
-					else if (game.players.size() == 2)
-						players.get(players.size() - 1).setColor(Color.PINK, "PINK");
-				} else if (number == 4) {
-					if (game.players.size() == 0)
-						players.get(players.size() - 1).setColor(Color.RED, "RED");
-					else if (game.players.size() == 1)
-						players.get(players.size() - 1).setColor(Color.GREEN, "GREEN");
-					else if (game.players.size() == 2)
-						players.get(players.size() - 1).setColor(Color.ORANGE, "ORANGE");
-					else if (game.players.size() == 3)
-						players.get(players.size() - 1).setColor(Color.PINK, "PINK");
-				} else if (number == 6) {
-					if (game.players.size() == 0)
-						players.get(players.size() - 1).setColor(Color.BLUE, "BLUE");
-					else if (game.players.size() == 1)
-						players.get(players.size() - 1).setColor(Color.RED, "RED");
-					else if (game.players.size() == 2)
-						players.get(players.size() - 1).setColor(Color.GREEN, "GREEN");
-					else if (game.players.size() == 3)
-						players.get(players.size() - 1).setColor(Color.BLACK, "BLACK");
-					else if (game.players.size() == 4)
-						players.get(players.size() - 1).setColor(Color.ORANGE, "ORANGE");
-					else if (game.players.size() == 5)
-						players.get(players.size() - 1).setColor(Color.PINK, "PINK");
-				} else
-					continue;
-
-				players.get(players.size() - 1).setGame(game);
-				game.players.add(players.get(players.size() - 1));
-
-				if (game.players.size() == number) {
-					for (int i = 0; i < game.players.size() - 1; i++)
-						game.players.get(i).setNextPlayer(game.players.get(i + 1));
-					game.players.get(game.players.size() - 1).setNextPlayer(game.players.get(0));
-
-					Random generator = new Random();
-					int randomIndex = generator.nextInt(game.players.size());
-					game.currentPlayer = game.players.get(randomIndex);
-
-					for (Player p : game.players) {
-						p.start();
-					}
-					game.started = true;
-				}
 			}
 		}
 	}
