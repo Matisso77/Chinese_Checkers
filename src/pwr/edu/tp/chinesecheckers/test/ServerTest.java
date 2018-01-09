@@ -49,6 +49,7 @@ public class ServerTest {
 		thread1.start();
 		try {
 			Socket socket = new Socket("localhost", 8901);
+			thread1.interrupt();
 			ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 			ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
 			out.writeObject(6);
@@ -56,7 +57,6 @@ public class ServerTest {
 			out.flush();
 			Object obj = in.readObject();
 			assertTrue(obj instanceof String);
-			thread1.interrupt();
 		} catch (IOException | ClassNotFoundException e) {
 		}
 	}
@@ -72,6 +72,7 @@ public class ServerTest {
 		thread1.start();
 		try {
 			Socket socket = new Socket("localhost", 8901);
+			thread1.interrupt();
 			ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 			ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
 			out.writeObject(4);
@@ -79,7 +80,6 @@ public class ServerTest {
 			out.flush();
 			Object obj = in.readObject();
 			assertTrue(obj instanceof String);
-			thread1.interrupt();
 		} catch (IOException | ClassNotFoundException e) {
 		}
 	}
@@ -95,6 +95,7 @@ public class ServerTest {
 		thread1.start();
 		try {
 			Socket socket = new Socket("localhost", 8901);
+			thread1.interrupt();
 			ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 			ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
 			out.writeObject(3);
@@ -102,7 +103,6 @@ public class ServerTest {
 			out.flush();
 			Object obj = in.readObject();
 			assertTrue(obj instanceof String);
-			thread1.interrupt();
 		} catch (IOException | ClassNotFoundException e) {
 		}
 	}
@@ -118,6 +118,7 @@ public class ServerTest {
 		thread1.start();
 		try {
 			Socket socket = new Socket("localhost", 8901);
+			thread1.interrupt();
 			ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
 			ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
 			out.writeObject(2);
@@ -125,7 +126,6 @@ public class ServerTest {
 			out.flush();
 			Object obj = in.readObject();
 			assertTrue(obj instanceof String);
-			thread1.interrupt();
 		} catch (IOException | ClassNotFoundException e) {
 		}
 	}
@@ -142,6 +142,7 @@ public class ServerTest {
 		try {
 			Socket socket1 = new Socket("localhost", 8901);
 			Socket socket2 = new Socket("localhost", 8901);
+			thread1.interrupt();
 			ObjectInputStream in1 = new ObjectInputStream(socket1.getInputStream());
 			ObjectOutputStream out1 = new ObjectOutputStream(socket1.getOutputStream());
 			out1.writeObject(2);
@@ -156,7 +157,6 @@ public class ServerTest {
 			assertTrue(obj instanceof String);
 			obj = in2.readObject();
 			assertTrue(obj instanceof String);
-			thread1.interrupt();
 		} catch (IOException | ClassNotFoundException e) {
 		}
 	}
@@ -174,6 +174,7 @@ public class ServerTest {
 			Socket socket1 = new Socket("localhost", 8901);
 			Socket socket2 = new Socket("localhost", 8901);
 			Socket socket3 = new Socket("localhost", 8901);
+			thread1.interrupt();
 			ObjectInputStream in1 = new ObjectInputStream(socket1.getInputStream());
 			ObjectOutputStream out1 = new ObjectOutputStream(socket1.getOutputStream());
 			out1.writeObject(3);
@@ -195,7 +196,6 @@ public class ServerTest {
 			assertTrue(obj instanceof String);
 			obj = in3.readObject();
 			assertTrue(obj instanceof String);
-			thread1.interrupt();
 		} catch (IOException | ClassNotFoundException e) {
 		}
 	}
@@ -214,6 +214,7 @@ public class ServerTest {
 			Socket socket2 = new Socket("localhost", 8901);
 			Socket socket3 = new Socket("localhost", 8901);
 			Socket socket4 = new Socket("localhost", 8901);
+			thread1.interrupt();
 			ObjectInputStream in1 = new ObjectInputStream(socket1.getInputStream());
 			ObjectOutputStream out1 = new ObjectOutputStream(socket1.getOutputStream());
 			out1.writeObject(4);
@@ -242,7 +243,6 @@ public class ServerTest {
 			assertTrue(obj instanceof String);
 			obj = in4.readObject();
 			assertTrue(obj instanceof String);
-			thread1.interrupt();
 		} catch (IOException | ClassNotFoundException e) {
 		}
 	}
@@ -263,6 +263,7 @@ public class ServerTest {
 			Socket socket4 = new Socket("localhost", 8901);
 			Socket socket5 = new Socket("localhost", 8901);
 			Socket socket6 = new Socket("localhost", 8901);
+			thread1.interrupt();
 			ObjectInputStream in1 = new ObjectInputStream(socket1.getInputStream());
 			ObjectOutputStream out1 = new ObjectOutputStream(socket1.getOutputStream());
 			out1.writeObject(6);
@@ -305,7 +306,6 @@ public class ServerTest {
 			assertTrue(obj instanceof String);
 			obj = in6.readObject();
 			assertTrue(obj instanceof String);
-			thread1.interrupt();
 		} catch (IOException | ClassNotFoundException e) {
 		}
 	}
